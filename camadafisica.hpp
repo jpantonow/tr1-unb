@@ -28,7 +28,7 @@ class CamadaFisica: public Camada {
 class CamadaAplicacao: public Camada {
     private:
     public:
-
+    string mensagem;
     void Transmissora(vector <int> quadro);
     void Receptora(vector <int> quadro);
     void Mensagem(string);
