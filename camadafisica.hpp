@@ -7,12 +7,12 @@ class Camada {
     public:
     vector <int> quadro;
     vector <int> fluxoBrutoDeBits;
+    int codificacao;
 };
 
 class CamadaFisica: public Camada {
     private:
     public:
-    int codificacao;
     const static int BINARIA = 0;
     const static int MANCHESTER = 1;
     const static int BIPOLAR = 2;
@@ -28,7 +28,7 @@ class CamadaFisica: public Camada {
 class CamadaAplicacao: public Camada {
     private:
     public:
-
+    string mensagem;
     void Transmissora(vector <int> quadro);
     void Receptora(vector <int> quadro);
     void Mensagem(string);
