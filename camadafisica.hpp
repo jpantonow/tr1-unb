@@ -3,12 +3,13 @@
 #include <cmath>
 #include <vector>
 using namespace std;
-class Camada{
+class Camada {
     public:
     vector <int> quadro;
-    int fluxoBrutoDeBits [];
+    vector <int> fluxoBrutoDeBits;
 };
-class CamadaFisica: public Camada{
+
+class CamadaFisica: public Camada {
     private:
     public:
     int codificacao;
@@ -18,18 +19,19 @@ class CamadaFisica: public Camada{
     int TransmissoraBinaria();
     int TransmissoraManchester();
     int TransmissoraBipolar();
-    int ReceptoraBinaria(quadro);
-    int ReceptoraManchester(quadro);
-    int ReceptoraBipolar(quadro);
+    int ReceptoraBinaria(vector <int> quadro);
+    int ReceptoraManchester(vector <int> quadro);
+    int ReceptoraBipolar(vector <int> quadro);
 
 };
 
-class CamadaAplicacao: public Camada{
+class CamadaAplicacao: public Camada {
     private:
     public:
 
-    void Transmissora(quadro);
-    void Receptora(quadro);
+    void Transmissora(vector <int> quadro);
+    void Receptora(vector <int> quadro);
+    void Mensagem(string);
 };
 
 
