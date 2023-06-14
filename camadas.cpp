@@ -6,13 +6,10 @@ vector <int> CamadaFisicaTransmissora::CodificarBinario(string mensagem){
 for(int i = 0; i < mensagem.size(); i++){
     char caractere = mensagem[i];
     int b = int(caractere);
-    while(b!= 0){
-        int resto = b % 2;
-        int binario = binario + (resto*produto);
-        b = b / 2;
-        produto *= 10;
+    for(int j=0;b>0;j++){
+        quadro[j] = b%2;
+        b = b/2; 
     }
-    quadro.push_back(b);
     }
     return quadro;
 }
