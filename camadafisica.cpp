@@ -25,7 +25,7 @@ void CamadaFisicaTransmissora(int quadro[]){
     int codificacao;
     int fluxoBrutoDeBits [];
     switch(codificacao){
-        case 0:
+    case 0:
             fluxoBrutoDeBits = CamadaFisicaTransmissoraBinaria(quadro);
             break;
         case 1:
@@ -35,7 +35,7 @@ void CamadaFisicaTransmissora(int quadro[]){
             fluxoBrutoDeBits = CamadaFisicaTransmissoraBipolar(quadro);
             break;
 }
-MeioDeComunicacao(fluxoBrutoDeBits);
+CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
 }
 
 int CamadaFisicaTransmissoraBinaria(){
