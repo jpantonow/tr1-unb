@@ -10,21 +10,19 @@ class Camada {
     int codificacao;
 };
 
-class CamadaFisica: public Camada {
-    private:
+class CamadaFisicaTransmissora: public Camada {
     public:
-    const static int BINARIA = 0;
-    const static int MANCHESTER = 1;
-    const static int BIPOLAR = 2;
-    int TransmissoraBinaria();
-    int TransmissoraManchester();
-    int TransmissoraBipolar();
-    int ReceptoraBinaria(vector <int> quadro);
-    int ReceptoraManchester(vector <int> quadro);
-    int ReceptoraBipolar(vector <int> quadro);
-
+    void iniciar(int codificacao);
+    vector <int> TransmissoraBinaria(vector <int> quadro);
+    vector <int> TransmissoraManchester(vector <int> quadro);
+    vector <int> TransmissoraBipolar(vector <int> quadro);
 };
-
+class CamadaFisicaReceptora: public Camada {
+    public:
+    vector <int> ReceptoraBinaria(vector <int> quadro);
+    vector <int> ReceptoraManchester(vector <int> quadro);
+    vector <int> ReceptoraBipolar(vector <int> quadro);
+};
 class CamadaAplicacao: public Camada {
     private:
     public:
@@ -32,6 +30,7 @@ class CamadaAplicacao: public Camada {
     void Transmissora(vector <int> quadro);
     void Receptora(vector <int> quadro);
     void Mensagem(string);
+    vector <int> CodificarBinario(string, vector <int> &quadro);
 };
 
 
