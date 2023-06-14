@@ -11,17 +11,13 @@ for(int i = 0; i < mensagem.size(); i++){
 }
 return quadro;
 }
-void CamadaAplicacao::Transmissora(vector <int> quadro){
+void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
 cin >> mensagem;
 cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
 cin >> codificacao;
 CamadaFisicaTransmissora camadaFisicaTransmissora;
 camadaFisicaTransmissora.iniciar(codificacao,mensagem);
-}
-
-void CamadaAplicacao::Mensagem(string mensagem){
-
 }
 
 void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem){
@@ -57,8 +53,12 @@ vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
 }
 
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
+    Mensagem();
+    for(int i=0;i<fluxoBrutoDeBits.size(); i++){
+        cout << fluxoBrutoDeBits[i];
+    }
 }
 
-void Mensagem(string mensagem){
-    cout << "O codigo codificado pode ser representado por: " << mensagem << endl;
+void CamadaAplicacao::Mensagem(){
+    cout << "O codigo codificado pode ser representado por: " << endl;
 }
