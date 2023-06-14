@@ -3,14 +3,13 @@
 vector <int> CamadaFisicaTransmissora::CodificarBinario(string mensagem){
 for(int i = 0; i < mensagem.size(); i++){
     char caractere = mensagem[i];
-    bitset<8> binary(caractere);
-    for(int j = 0; j <= 7; i++){
-        int bit = binary[j];
-        quadro.push_back(bit);
+    int b = int(caractere);
+    bitset<sizeof(b) * 8> bits(b);
+    quadro.push_back(b);
     }
+    return quadro;
 }
-return quadro;
-}
+
 void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
 cin >> mensagem;
