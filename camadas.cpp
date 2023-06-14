@@ -1,16 +1,19 @@
 #include "camadafisica.hpp"
 #include <bitset>
 vector <int> CamadaFisicaTransmissora::CodificarBinario(string mensagem){
+    int binario = 0;
+    int produto = 1;
 for(int i = 0; i < mensagem.size(); i++){
     char caractere = mensagem[i];
-    bitset<8> binary(caractere);
-    for(int j = 0; j <= 7; i++){
-        int bit = binary[j];
-        quadro.push_back(bit);
+    int b = int(caractere);
+    for(int j=0;b>0;j++){
+        quadro[j] = b%2;
+        b = b/2; 
     }
+    }
+    return quadro;
 }
-return quadro;
-}
+
 void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
 cin >> mensagem;
@@ -55,7 +58,7 @@ vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
     Mensagem();
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
-        cout << fluxoBrutoDeBits[i];
+        cout << fluxoBrutoDeBits[i] << endl;
     }
 }
 
