@@ -20,14 +20,12 @@ CamadaFisicaTransmissora camadaFisicaTransmissora;
 camadaFisicaTransmissora.iniciar(codificacao,mensagem);
 }
 
-void CamadaAplicacao::Receptora(vector <int> quadro){
-
-}
 void CamadaAplicacao::Mensagem(string mensagem){
 
 }
 
 void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem){
+
 switch(codificacao){
     case BINARIA:
             quadro = CodificarBinario(mensagem);
@@ -40,6 +38,8 @@ switch(codificacao){
             fluxoBrutoDeBits = TransmissoraBipolar(quadro);
             break;
 }
+CamadaAplicacao camadaAplicacao;
+camadaAplicacao.Receptora(fluxoBrutoDeBits);
 }
 vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro){
 return quadro;
@@ -54,4 +54,11 @@ vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
 
 vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
     return quadro;
+}
+
+vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
+}
+
+void Mensagem(string mensagem){
+    cout << "O codigo codificado pode ser representado por: " << mensagem << endl;
 }

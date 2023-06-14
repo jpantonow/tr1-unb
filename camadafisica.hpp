@@ -32,7 +32,7 @@ class CamadaAplicacao: public Camada {
     public:
     string mensagem;
     void Transmissora(vector <int> quadro);
-    void Receptora(vector <int> quadro);
+    vector <int> Receptora(vector <int> fluxoBrutoDeBits);
     void Mensagem(string);
 };
 
