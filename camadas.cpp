@@ -1,10 +1,10 @@
 #include "camadafisica.hpp"
 #include <bitset>
-vector <int> CamadaAplicacao::CodificarBinario(string mensagem, vector <int> &quadro){
-for(int i = mensagem.size()-1; i >= 0; i--){
+vector <int> CamadaFisicaTransmissora::CodificarBinario(string mensagem){
+for(int i = 0; i < mensagem.size(); i++){
     char caractere = mensagem[i];
     bitset<8> binary(caractere);
-    for(int j = 7; j = 0; i--){
+    for(int j = 0; j <= 7; i++){
         int bit = binary[j];
         quadro.push_back(bit);
     }
@@ -17,7 +17,7 @@ cin >> mensagem;
 cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
 cin >> codificacao;
 CamadaFisicaTransmissora camadaFisicaTransmissora;
-camadaFisicaTransmissora.iniciar(codificacao);
+camadaFisicaTransmissora.iniciar(codificacao,mensagem);
 }
 
 void CamadaAplicacao::Receptora(vector <int> quadro){
@@ -27,25 +27,31 @@ void CamadaAplicacao::Mensagem(string mensagem){
 
 }
 
-void CamadaFisicaTransmissora::iniciar(int codificacao){
+void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem){
 switch(codificacao){
-    case 0:
+    case BINARIA:
+            quadro = CodificarBinario(mensagem);
             fluxoBrutoDeBits = TransmissoraBinaria(quadro);
             break;
-        case 1:
+        case MANCHESTER:
             fluxoBrutoDeBits = TransmissoraManchester(quadro);
             break;
-        case 2:
+        case BIPOLAR:
             fluxoBrutoDeBits = TransmissoraBipolar(quadro);
             break;
 }
 }
 vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro){
-
+return quadro;
 }
+
 vector <int> CamadaFisicaTransmissora::TransmissoraManchester(vector <int> quadro){
 
 }
 vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
 
+}
+
+vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
+    return quadro;
 }
