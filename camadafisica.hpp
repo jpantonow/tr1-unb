@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <stdlib.h>
 #include <vector>
 using namespace std;
 class Camada {
