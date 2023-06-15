@@ -6,12 +6,11 @@ vector <int> CamadaFisicaTransmissora::CodificarBinario(string mensagem){
 for(int i = 0; i < mensagem.size(); i++){
     char caractere = mensagem[i];
     int b = int(caractere);
-    for(int j=0;b>0;j++){
-        quadro[j] = b%2;
-        b = b/2; 
+    string binario = bitset<8>(b).to_string();
+    b = stoi(binario);
+    quadro.push_back(b);
     }
-    }
-    return quadro;
+return quadro;
 }
 
 void CamadaAplicacao::Transmissora(){
@@ -24,7 +23,7 @@ camadaFisicaTransmissora.iniciar(codificacao,mensagem);
 }
 
 void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem){
-
+CamadaAplicacao camadaAplicacao;
 switch(codificacao){
     case BINARIA:
             quadro = CodificarBinario(mensagem);
@@ -37,7 +36,6 @@ switch(codificacao){
             fluxoBrutoDeBits = TransmissoraBipolar(quadro);
             break;
 }
-CamadaAplicacao camadaAplicacao;
 camadaAplicacao.Receptora(fluxoBrutoDeBits);
 }
 vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro){
