@@ -16,6 +16,7 @@ class CamadaFisicaTransmissora: public Camada {
     const static int BINARIA = 0;
     const static int MANCHESTER = 1;
     const static int BIPOLAR = 2;
+    vector <int> CLOCK = {0, 1};
     public:
     void iniciar(int codificacao, string mensagem);
     vector <int> CodificarBinario(string mensagem);
