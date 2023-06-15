@@ -19,10 +19,10 @@ class CamadaFisicaTransmissora: public Camada {
     vector <int> CLOCK = {0, 1};
     public:
     void iniciar(int codificacao, string mensagem);
-    vector <int> CodificarBinario(string mensagem);
     vector <int> TransmissoraBinaria(vector <int> quadro);
     vector <int> TransmissoraManchester(vector <int> quadro);
     vector <int> TransmissoraBipolar(vector <int> quadro);
+    vector <int> ConversorStringBits(string mensagem);
 };
 class CamadaFisicaReceptora: public Camada {
     public:

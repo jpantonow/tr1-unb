@@ -3,7 +3,7 @@
 
 using namespace std;
 
-vector <int> ConversorStringBits(string mensagem) {
+vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     vector <int> mensagemBitStream;
 
     for (int i {}; i < mensagem.size(); ++i) {
@@ -12,24 +12,12 @@ vector <int> ConversorStringBits(string mensagem) {
 
         for (int j {}; j < bitsString.size(); ++j) {
             int bit = static_cast<int>(bitsString[j]);
-            mensagemBitStream.push_back(bit);
+            mensagemBitStream.push_back(bit-48);
         }
     }
     return mensagemBitStream;
 }
 
-vector <int> CamadaFisicaTransmissora::CodificarBinario(string mensagem){
-    int binario = 0;
-    int produto = 1;
-for(int i = 0; i < mensagem.size(); i++){
-    char caractere = mensagem[i];
-    int b = int(caractere);
-    string binario = bitset<8>(b).to_string();
-    b = stoi(binario);
-    quadro.push_back(b);
-    }
-return quadro;
-}
 
 void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
@@ -44,7 +32,7 @@ void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem){
 CamadaAplicacao camadaAplicacao;
 switch(codificacao){
     case BINARIA:
-            quadro = CodificarBinario(mensagem);
+            quadro = ConversorStringBits(mensagem);
             fluxoBrutoDeBits = TransmissoraBinaria(quadro);
             break;
         case MANCHESTER:
@@ -74,7 +62,12 @@ vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
     Mensagem();
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
-        cout << fluxoBrutoDeBits[i] << endl;
+        if(i%8 == 0){
+            cout <<"\n" << fluxoBrutoDeBits[i];
+        }
+        else{
+        cout << fluxoBrutoDeBits[i];
+        }
     }
 }
 
