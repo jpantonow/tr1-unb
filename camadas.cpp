@@ -1,5 +1,23 @@
 #include "camadafisica.hpp"
 #include <bitset>
+
+using namespace std;
+
+vector <int> ConversorStringBits(string mensagem) {
+    vector <int> mensagemBitStream;
+
+    for (int i {}; i < mensagem.size(); ++i) {
+        bitset<8> bits(mensagem[i]);
+        string bitsString =  bits.to_string();
+
+        for (int j {}; j < bitsString.size(); ++j) {
+            int bit = static_cast<int>(bitsString[j]);
+            mensagemBitStream.push_back(bit);
+        }
+    }
+    return mensagemBitStream;
+}
+
 vector <int> CamadaFisicaTransmissora::CodificarBinario(string mensagem){
     int binario = 0;
     int produto = 1;
