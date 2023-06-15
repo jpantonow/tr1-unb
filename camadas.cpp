@@ -21,7 +21,7 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
 
 void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
-cin >> mensagem;
+getline(cin, mensagem);
 cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
 cin >> codificacao;
 CamadaFisicaTransmissora camadaFisicaTransmissora;
