@@ -88,6 +88,9 @@ vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
 vector <int> CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
     return quadro;
 }
+vector <int> CamadaFisicaReceptora::ReceptoraBipolar(vector <int> quadro){
+    return quadro;
+}
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
     Mensagem();
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
