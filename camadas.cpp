@@ -68,8 +68,10 @@ vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
         if (quadro[i]) {
             if (sinal) {
                 tremDeBits.push_back(-1);
+                sinal = 0;
             } else {
                 tremDeBits.push_back(1);
+                sinal = 1;
             }
         } else {
             tremDeBits.push_back(0);
