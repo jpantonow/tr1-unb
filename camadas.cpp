@@ -5,10 +5,10 @@ using namespace std;
 
 vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     vector <int> mensagemBitStream;
-
     for (int i {}; i < mensagem.size(); ++i) {
         bitset<8> bits(mensagem[i]);
         string bitsString =  bits.to_string();
+        mensagemBitStream.push_back(bitsString.size());
 
         for (int j {}; j < bitsString.size(); ++j) {
             int bit = static_cast<int>(bitsString[j]);
@@ -18,7 +18,26 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     return mensagemBitStream;
 }
 
-
+ string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream){
+ string mensagem;
+ vector <int> resultado;
+ int soma;
+for(int i = 0;i<bitstream.size();i++){
+    if(i%8 == 0){
+        for(int j = 0; j <resultado.size();j++) {
+            soma += resultado[j];
+        }
+        char caractere = char(soma);
+        mensagem += caractere;
+        resultado.clear();
+        resultado.push_back(bitstream[i]);
+    }
+    else{
+        resultado.push_back(bitstream[i]);
+    }
+ }
+ return mensagem;
+ }
 void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
 getline(cin, mensagem);
@@ -94,19 +113,19 @@ vector <int> CamadaFisicaReceptora::ConversorManchesterBits (vector <int> quadro
     return bitstream;
 }
 
-vector <int> CamadaFisicaReceptora::ConversorBinarioBits (vector <int> quadro) {
-    vector <int> bitstream;
+// vector <int> CamadaFisicaReceptora::ConversorBinarioBits (vector <int> quadro) {
+//     vector <int> bitstream;
 
-    for (int i = 0; i < quadro.size(); ++i) {
-        if (quadro[i]) {
-            bitstream.push_back(1);
-        } else {
-            bitstream.push_back(0);
-        }
-    }
+//     for (int i = 0; i < quadro.size(); ++i) {
+//         if (quadro[i]) {
+//             bitstream.push_back(1);
+//         } else {
+//             bitstream.push_back(0);
+//         }
+//     }
  
-    return bitstream;
-}
+//     return bitstream;
+// }
 
 vector <int> CamadaFisicaReceptora::ConversorBipolarBits (vector <int> quadro) {
     vector <int> bitstream;
