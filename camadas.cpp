@@ -80,7 +80,7 @@ vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
 return tremDeBits;
 }
 
-vector <int> conversorManchesterBits (vector <int> quadro) {
+vector <int> CamadaFisicaReceptora::ConversorManchesterBits (vector <int> quadro) {
     vector <int> bitstream;
 
     for (int i = 0; i < quadro.size()/2; ++i) {
@@ -94,7 +94,7 @@ vector <int> conversorManchesterBits (vector <int> quadro) {
     return bitstream;
 }
 
-vector <int> conversorBinarioBits (vector <int> quadro) {
+vector <int> CamadaFisicaReceptora::ConversorBinarioBits (vector <int> quadro) {
     vector <int> bitstream;
 
     for (int i = 0; i < quadro.size(); ++i) {
@@ -108,7 +108,7 @@ vector <int> conversorBinarioBits (vector <int> quadro) {
     return bitstream;
 }
 
-vector <int> conversorBipolarBits (vector <int> quadro) {
+vector <int> CamadaFisicaReceptora::ConversorBipolarBits (vector <int> quadro) {
     vector <int> bitstream;
 
     for (int i = 0; i < quadro.size(); ++i) {

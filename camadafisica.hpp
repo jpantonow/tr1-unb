@@ -26,6 +26,9 @@ class CamadaFisicaTransmissora: public Camada {
 };
 class CamadaFisicaReceptora: public Camada {
     public:
+    vector <int> ConversorBinarioBits(vector <int> quadro);
+    vector <int> ConversorManchesterBits(vector <int> quadro);
+    vector <int> ConversorBipolarBits(vector <int> quadro);
     vector <int> ReceptoraBinaria(vector <int> quadro);
     vector <int> ReceptoraManchester(vector <int> quadro);
     vector <int> ReceptoraBipolar(vector <int> quadro);
@@ -39,5 +42,9 @@ class CamadaAplicacao: public Camada {
     void Mensagem();
 };
 
-
+class MeioDeComunicacao{
+    private:
+    public:
+    vector <int> Comunicacao(vector <int> fluxoBrutoDeBits);
+};
 
