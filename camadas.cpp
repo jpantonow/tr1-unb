@@ -5,10 +5,18 @@ using namespace std;
 
 vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     vector <int> mensagemBitStream;
+
     for (int i {}; i < mensagem.size(); ++i) {
         bitset<8> bits(mensagem[i]);
         string bitsString =  bits.to_string();
-        mensagemBitStream.push_back(bitsString.size());
+        mensagemBitStream.push_back(0);
+        mensagemBitStream.push_back(0);
+        mensagemBitStream.push_back(0);
+        mensagemBitStream.push_back(0);
+        mensagemBitStream.push_back(1);
+        mensagemBitStream.push_back(0);
+        mensagemBitStream.push_back(0);
+        mensagemBitStream.push_back(0);
 
         for (int j {}; j < bitsString.size(); ++j) {
             int bit = static_cast<int>(bitsString[j]);
@@ -21,11 +29,13 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
  string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream){
  string mensagem;
  vector <int> resultado;
- int soma;
+ int soma = 0;
 for(int i = 0;i<bitstream.size();i++){
     if(i%8 == 0){
-        for(int j = 0; j <resultado.size();j++) {
-            soma += resultado[j];
+        int k = 0;
+        for(int j=resultado.size()-1; j=0;j-- ) {
+            soma += resultado[j]*pow(2,k);
+            k+=1;
         }
         char caractere = char(soma);
         mensagem += caractere;
@@ -113,19 +123,18 @@ vector <int> CamadaFisicaReceptora::ConversorManchesterBits (vector <int> quadro
     return bitstream;
 }
 
-// vector <int> CamadaFisicaReceptora::ConversorBinarioBits (vector <int> quadro) {
-//     vector <int> bitstream;
-
-//     for (int i = 0; i < quadro.size(); ++i) {
-//         if (quadro[i]) {
-//             bitstream.push_back(1);
-//         } else {
-//             bitstream.push_back(0);
-//         }
-//     }
+ vector <int> CamadaFisicaReceptora::ConversorBinarioBits (vector <int> quadro) {
+     vector <int> bitstream;
+     for (int i = 0; i < quadro.size(); ++i) {
+         if (quadro[i]) {
+             bitstream.push_back(1);
+         } else {
+             bitstream.push_back(0);
+         }
+     }
  
-//     return bitstream;
-// }
+     return bitstream;
+ }
 
 vector <int> CamadaFisicaReceptora::ConversorBipolarBits (vector <int> quadro) {
     vector <int> bitstream;
@@ -141,8 +150,9 @@ vector <int> CamadaFisicaReceptora::ConversorBipolarBits (vector <int> quadro) {
     return bitstream;
 }
 
-vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
-    return quadro;
+string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
+    string mensagem = ConversorBitString(quadro);
+    return mensagem;
 }
 
 vector <int> CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
@@ -154,6 +164,7 @@ vector <int> CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
 }
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
     Mensagem();
+    CamadaFisicaReceptora receptora;
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
         if(i%8 == 0){
             cout <<"\n" << fluxoBrutoDeBits[i];
@@ -167,6 +178,7 @@ vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
         }
         }
     }
+    cout << "\n" << receptora.ConversorBitString(fluxoBrutoDeBits);
 }
 
 void CamadaAplicacao::Mensagem(){
