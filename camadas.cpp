@@ -36,6 +36,7 @@ switch(codificacao){
             fluxoBrutoDeBits = TransmissoraBinaria(quadro);
             break;
         case MANCHESTER:
+            quadro = ConversorStringBits(mensagem);
             fluxoBrutoDeBits = TransmissoraManchester(quadro);
             break;
         case BIPOLAR:
@@ -44,21 +45,47 @@ switch(codificacao){
 }
 camadaAplicacao.Receptora(fluxoBrutoDeBits);
 }
+
 vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro){
 return quadro;
 }
 
 vector <int> CamadaFisicaTransmissora::TransmissoraManchester(vector <int> quadro){
+vector <int> tremDeBits;
+for(int i = 0; i < quadro.size(); i++){
+    tremDeBits.push_back(CLOCK[0] ^ quadro[i]);
+    tremDeBits.push_back(CLOCK[1] ^ quadro[i]);
+}
+return tremDeBits;
 
 }
+
 vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
+    vector <int> tremDeBits;
+    int sinal {};
 
+    for(int i = 0; i < quadro.size(); ++i) {
+        if (quadro[i]) {
+            if (sinal) {
+                tremDeBits.push_back(-1);
+            } else {
+                tremDeBits.push_back(1);
+            }
+        } else {
+            tremDeBits.push_back(0);
+        }
+    }
+    return tremDeBits;
 }
+
 
 vector <int> CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
     return quadro;
 }
 
+vector <int> CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
+    return quadro;
+}
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
     Mensagem();
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
