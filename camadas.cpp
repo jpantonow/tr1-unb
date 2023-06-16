@@ -32,8 +32,8 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
  int soma = 0;
 for(int i = 0;i<bitstream.size();i++){
     if(i%8 == 0){
-        for(int i = 0; i < resultado.size(); i++) {
-            soma += resultado[resultado.size()-i]*pow(2,i);
+        for(int j = 0; j < resultado.size(); j++) {
+            soma += resultado[resultado.size()-j]*pow(2,j);
         }
         char caractere = char(soma);
         mensagem.push_back(caractere);
