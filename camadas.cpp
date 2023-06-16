@@ -1,6 +1,6 @@
 #include "camadafisica.hpp"
 #include <bitset>
-
+#include <math.h>
 using namespace std;
 
 vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
