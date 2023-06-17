@@ -31,21 +31,11 @@ for(int i = 0;i<bitstream.size();i++){
         caractere = char(soma);
         mensagem += caractere;
         resultado.clear();
-        if(bitstream[i]==1){
-        resultado.push_back(1);
-     }
-     else{
-        resultado.push_back(0);
-     } 
+        resultado.push_back(bitstream[i]);
         soma = 0;
     }
     else{
-     if(bitstream[i]==1){
-        resultado.push_back(1);
-     }
-     else{
-        resultado.push_back(0);
-     }   
+     resultado.push_back(bitstream[i]);
     }
  }
  return mensagem;
