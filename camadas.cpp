@@ -9,15 +9,6 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     for (int i {}; i < mensagem.size(); ++i) {
         bitset<8> bits(mensagem[i]);
         string bitsString =  bits.to_string();
-        mensagemBitStream.push_back(0);
-        mensagemBitStream.push_back(0);
-        mensagemBitStream.push_back(0);
-        mensagemBitStream.push_back(0);
-        mensagemBitStream.push_back(1);
-        mensagemBitStream.push_back(0);
-        mensagemBitStream.push_back(0);
-        mensagemBitStream.push_back(0);
-
         for (int j {}; j < bitsString.size(); ++j) {
             int bit = static_cast<int>(bitsString[j]);
             mensagemBitStream.push_back(bit-48);
@@ -29,19 +20,32 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
  string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream){
  string mensagem;
  vector <int> resultado;
- int soma = 0;
 for(int i = 0;i<bitstream.size();i++){
-    if(i%8 == 0){
+    if(i%8 == 0 || i == bitstream.size()-1){
+        int soma = 0;
         for(int j = 0; j < resultado.size(); j++) {
-            soma += resultado[resultado.size()-j]*pow(2,j);
+            int a = int(pow(2,j));
+            soma += int(resultado[7-j]*a);
         }
-        char caractere = char(soma);
-        mensagem.push_back(caractere);
+        char caractere;
+        caractere = char(soma);
+        mensagem += caractere;
         resultado.clear();
-        resultado.push_back(bitstream[i]);
+        if(bitstream[i]==1){
+        resultado.push_back(1);
+     }
+     else{
+        resultado.push_back(0);
+     } 
+        soma = 0;
     }
     else{
-        resultado.push_back(bitstream[i]);
+     if(bitstream[i]==1){
+        resultado.push_back(1);
+     }
+     else{
+        resultado.push_back(0);
+     }   
     }
  }
  return mensagem;
