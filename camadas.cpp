@@ -170,11 +170,11 @@ vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
         }
         }
     }
-    cout << "\n" << receptora.ConversorBitString(fluxoBrutoDeBits);
+    cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(fluxoBrutoDeBits);
 }
 
 void CamadaAplicacao::Mensagem(){
-    cout << "O codigo codificado pode ser representado por: " << endl;
+    cout << "A mensagem codificada pode ser representada por: " << endl;
 }
 
 vector <int> MeioDeComunicacao::Comunicacao(vector <int> fluxoBrutoDeBits){
