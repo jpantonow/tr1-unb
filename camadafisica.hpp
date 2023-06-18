@@ -43,7 +43,8 @@ class CamadaAplicacao: public Camada {
     string mensagem;
     void Transmissora();
     vector <int> Receptora(vector <int> fluxoBrutoDeBits, int codificacao);
-    void Mensagem();
+    void MensagemCodificada();
+    void MensagemRecebida(string);
 };
 
 class MeioDeComunicacao{
