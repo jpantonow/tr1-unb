@@ -88,10 +88,10 @@ vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
     for(int i = 0; i < quadro.size(); ++i) {
         if (quadro[i]) {
             if (sinal) {
-                tremDeBits.push_back(-1);
+                tremDeBits.push_back(11);
                 sinal = 0;
             } else {
-                tremDeBits.push_back(1);
+                tremDeBits.push_back(10);
                 sinal = 1;
             }
         } else {
@@ -147,8 +147,10 @@ string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
     return mensagem;
 }
 
-vector <int> CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
-    return quadro;
+string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
+    vector <int> bitstream = ConversorManchesterBits(quadro);
+    string mensagem = ConversorBitString(bitstream);
+    return mensagem;
 }
 
 vector <int> CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
@@ -157,12 +159,13 @@ vector <int> CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
     Mensagem();
     CamadaFisicaReceptora receptora;
+    int codificacao;
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
         if(i%8 == 0){
             cout <<"\n" << fluxoBrutoDeBits[i];
         }
         else{
-        if(fluxoBrutoDeBits[i] == -1){
+        if(fluxoBrutoDeBits[i] == 11 or fluxoBrutoDeBits[i] == 10){
             cout << " " << fluxoBrutoDeBits[i];
         }
         else{

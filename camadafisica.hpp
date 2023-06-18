@@ -31,7 +31,7 @@ class CamadaFisicaReceptora: public Camada {
     vector <int> ConversorBipolarBits(vector <int> quadro);
     string ConversorBitString(vector<int> bitstream);
     string ReceptoraBinaria(vector <int> quadro);
-    vector <int> ReceptoraManchester(vector <int> quadro);
+    string ReceptoraManchester(vector <int> quadro);
     vector <int> ReceptoraBipolar(vector <int> quadro);
 };
 class CamadaAplicacao: public Camada {
