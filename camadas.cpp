@@ -176,6 +176,20 @@ vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codif
     CamadaFisicaReceptora receptora;
     string mensagem;
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
+        if(codificacao==2){
+            if(i%8 == 0){
+            cout <<"\n0" << fluxoBrutoDeBits[i];
+        }
+        else{
+        if(fluxoBrutoDeBits[i] == 11 or fluxoBrutoDeBits[i] == 10){
+            cout << " " << fluxoBrutoDeBits[i];
+        }
+        else{
+            cout << " 0" << fluxoBrutoDeBits[i];
+        }
+        }
+        }
+        else{
         if(i%8 == 0){
             cout <<"\n" << fluxoBrutoDeBits[i];
         }
@@ -187,6 +201,7 @@ vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codif
             cout << "  " << fluxoBrutoDeBits[i];
         }
         }
+    }
     }
 
     switch(codificacao){
