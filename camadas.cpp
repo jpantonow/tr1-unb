@@ -59,6 +59,9 @@ void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
 getline(cin, mensagem);
 cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
+cout << "0 - Binaria" << endl;
+cout << "1 - Manchester" << endl;
+cout << "2 - Bipolar" << endl;
 cin >> codificacao;
 CamadaFisicaTransmissora camadaFisicaTransmissora;
 camadaFisicaTransmissora.iniciar(codificacao,mensagem);
@@ -232,6 +235,7 @@ void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codi
 }
 
 void CamadaAplicacao::MensagemRecebida(string mensagem){
+    cout << "\n";
     cout << "\nA mensagem recebida foi: " << mensagem;
 }
 
