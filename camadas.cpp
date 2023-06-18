@@ -17,9 +17,9 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     return mensagemBitStream;
 }
 
- string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream){
- string mensagem;
- vector <int> resultado;
+string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream){
+    string mensagem;
+    vector <int> resultado;
 for(int i = 0;i<bitstream.size();i++){
     if(i%8 == 0){
         int soma = 0;
@@ -54,6 +54,7 @@ for(int i = 0;i<bitstream.size();i++){
  }
  return mensagem;
  }
+
 void CamadaAplicacao::Transmissora(){
 cout << "Escolha uma mensagem a ser codificada: " << endl;
 getline(cin, mensagem);
@@ -64,10 +65,10 @@ camadaFisicaTransmissora.iniciar(codificacao,mensagem);
 }
 
 void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem){
-CamadaAplicacao camadaAplicacao;
-MeioDeComunicacao meioDeComunicacao;
-switch(codificacao){
-    case BINARIA:
+    CamadaAplicacao camadaAplicacao;
+    MeioDeComunicacao meioDeComunicacao;
+    switch(codificacao){
+        case BINARIA:
             quadro = ConversorStringBits(mensagem);
             fluxoBrutoDeBits = TransmissoraBinaria(quadro);
             break;
@@ -84,16 +85,17 @@ vector <int> fluxoComunicado = meioDeComunicacao.Comunicacao(fluxoBrutoDeBits);
 camadaAplicacao.Receptora(fluxoComunicado, codificacao);
 }
 vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro){
-return quadro;
+    return quadro;
 }
 
 vector <int> CamadaFisicaTransmissora::TransmissoraManchester(vector <int> quadro){
-vector <int> tremDeBits;
-for(int i = 0; i < quadro.size(); i++){
-    tremDeBits.push_back(CLOCK[0] ^ quadro[i]);
-    tremDeBits.push_back(CLOCK[1] ^ quadro[i]);
-}
-return tremDeBits;
+    vector <int> tremDeBits;
+    for(int i = 0; i < quadro.size(); i++){
+        tremDeBits.push_back(CLOCK[0] ^ quadro[i]);
+        tremDeBits.push_back(CLOCK[1] ^ quadro[i]);
+    }
+    
+    return tremDeBits;
 
 }
 vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
