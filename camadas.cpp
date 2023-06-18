@@ -62,6 +62,7 @@ cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
 cout << "0 - Binaria" << endl;
 cout << "1 - Manchester" << endl;
 cout << "2 - Bipolar" << endl;
+cout << "Sua escolha: ";
 cin >> codificacao;
 CamadaFisicaTransmissora camadaFisicaTransmissora;
 camadaFisicaTransmissora.iniciar(codificacao,mensagem);
