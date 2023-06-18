@@ -174,9 +174,33 @@ string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
     return mensagem;
 }
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao){
-    MensagemCodificada();
+    MensagemCodificada(fluxoBrutoDeBits, codificacao);
     CamadaFisicaReceptora receptora;
     string mensagem;
+
+    switch(codificacao){
+        case BINARIA:
+        {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits);
+            MensagemRecebida(mensagem);
+            break;
+        }
+        case MANCHESTER:
+        {   mensagem = receptora.ReceptoraManchester(fluxoBrutoDeBits);
+            MensagemRecebida(mensagem);
+            break;
+        }
+        case BIPOLAR:
+        {   
+            mensagem = receptora.ReceptoraBipolar(fluxoBrutoDeBits);
+            MensagemRecebida(mensagem);
+            break;
+        }
+    }
+
+}
+
+void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codificacao){
+    cout << "A mensagem codificada pode ser representada por: " << endl;
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
         if(codificacao==2){
             if(i%8 == 0){
@@ -205,30 +229,6 @@ vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codif
         }
     }
     }
-
-    switch(codificacao){
-        case BINARIA:
-        {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits);
-            MensagemRecebida(mensagem);
-            break;
-        }
-        case MANCHESTER:
-        {   mensagem = receptora.ReceptoraManchester(fluxoBrutoDeBits);
-            MensagemRecebida(mensagem);
-            break;
-        }
-        case BIPOLAR:
-        {   
-            mensagem = receptora.ReceptoraBipolar(fluxoBrutoDeBits);
-            MensagemRecebida(mensagem);
-            break;
-        }
-    }
-
-}
-
-void CamadaAplicacao::MensagemCodificada(){
-    cout << "A mensagem codificada pode ser representada por: " << endl;
 }
 
 void CamadaAplicacao::MensagemRecebida(string mensagem){
