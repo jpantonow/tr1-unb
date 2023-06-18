@@ -67,7 +67,7 @@ switch(codificacao){
             break;
 }
 vector <int> fluxoComunicado = meioDeComunicacao.Comunicacao(fluxoBrutoDeBits);
-camadaAplicacao.Receptora(fluxoComunicado);
+camadaAplicacao.Receptora(fluxoComunicado, codificacao);
 }
 vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro){
 return quadro;
@@ -111,7 +111,6 @@ vector <int> CamadaFisicaReceptora::ConversorManchesterBits (vector <int> quadro
             bitstream.push_back(0);
         }
     }
- 
     return bitstream;
 }
 
@@ -156,10 +155,9 @@ string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
 vector <int> CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
     return tremDeBits;
 }
-vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
+vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao){
     Mensagem();
     CamadaFisicaReceptora receptora;
-    int codificacao;
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
         if(i%8 == 0){
             cout <<"\n" << fluxoBrutoDeBits[i];
@@ -173,7 +171,28 @@ vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits){
         }
         }
     }
-    cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(fluxoBrutoDeBits);
+
+    switch(codificacao){
+        case BINARIA:
+        {
+            vector <int> binaria = receptora.ConversorBinarioBits(fluxoBrutoDeBits);
+            cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(binaria);
+            break;
+        }
+        case MANCHESTER:
+        {
+            vector <int> manchester = receptora.ConversorManchesterBits(fluxoBrutoDeBits);
+            cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(manchester);
+            break;
+        }
+        case BIPOLAR:
+        {
+            vector <int> bipolar = receptora.ConversorBipolarBits(fluxoBrutoDeBits);
+            cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(bipolar);
+            break;
+        }
+    }
+
 }
 
 void CamadaAplicacao::Mensagem(){

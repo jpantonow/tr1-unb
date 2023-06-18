@@ -36,10 +36,13 @@ class CamadaFisicaReceptora: public Camada {
 };
 class CamadaAplicacao: public Camada {
     private:
+    const static int BINARIA = 0;
+    const static int MANCHESTER = 1;
+    const static int BIPOLAR = 2;
     public:
     string mensagem;
     void Transmissora();
-    vector <int> Receptora(vector <int> fluxoBrutoDeBits);
+    vector <int> Receptora(vector <int> fluxoBrutoDeBits, int codificacao);
     void Mensagem();
 };
 
