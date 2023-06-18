@@ -6,8 +6,9 @@
 #include <cmath>
 #include <vector>
 using namespace std;
+
 int main(){
-CamadaAplicacao camadaAplicacao;
-camadaAplicacao.Transmissora();
-return 0;
+    CamadaAplicacao camadaAplicacao;
+    camadaAplicacao.Transmissora();
+    return 0;
 }
