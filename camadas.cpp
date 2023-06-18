@@ -21,7 +21,21 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
  string mensagem;
  vector <int> resultado;
 for(int i = 0;i<bitstream.size();i++){
-    if(i%8 == 0 || i == bitstream.size()-1){
+    if(i%8 == 0){
+        int soma = 0;
+        for(int j = 0; j < resultado.size(); j++) {
+            int a = int(pow(2,j));
+            soma += int(resultado[7-j]*a);
+        }
+        char caractere;
+        caractere = char(soma);
+        mensagem += caractere;
+        resultado.clear();
+        resultado.push_back(bitstream[i]);
+        soma = 0;
+    }
+    else if(i==bitstream.size()-1){
+        resultado.push_back(bitstream[i]);
         int soma = 0;
         for(int j = 0; j < resultado.size(); j++) {
             int a = int(pow(2,j));
@@ -152,12 +166,15 @@ string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
     return mensagem;
 }
 
-vector <int> CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
-    return tremDeBits;
+string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
+    vector <int> bitstream = ConversorBipolarBits(tremDeBits);
+    string mensagem = ConversorBitString(bitstream);
+    return mensagem;
 }
 vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao){
     Mensagem();
     CamadaFisicaReceptora receptora;
+    string mensagem;
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
         if(i%8 == 0){
             cout <<"\n" << fluxoBrutoDeBits[i];
@@ -174,21 +191,19 @@ vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codif
 
     switch(codificacao){
         case BINARIA:
-        {
-            vector <int> binaria = receptora.ConversorBinarioBits(fluxoBrutoDeBits);
-            cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(binaria);
+        {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits);
+            cout << "\nA mensagem recebida foi: " << mensagem;
             break;
         }
         case MANCHESTER:
-        {
-            vector <int> manchester = receptora.ConversorManchesterBits(fluxoBrutoDeBits);
-            cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(manchester);
+        {   mensagem = receptora.ReceptoraManchester(fluxoBrutoDeBits);
+            cout << "\nA mensagem recebida foi: " << mensagem;
             break;
         }
         case BIPOLAR:
-        {
-            vector <int> bipolar = receptora.ConversorBipolarBits(fluxoBrutoDeBits);
-            cout << "\nA mensagem recebida foi: " << receptora.ConversorBitString(bipolar);
+        {   
+            mensagem = receptora.ReceptoraBipolar(fluxoBrutoDeBits);
+            cout << "\nA mensagem recebida foi: " << mensagem;
             break;
         }
     }
