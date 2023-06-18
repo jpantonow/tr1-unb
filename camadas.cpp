@@ -237,7 +237,7 @@ void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codi
 
 void CamadaAplicacao::MensagemRecebida(string mensagem){
     cout << "\n";
-    cout << "\nA mensagem recebida foi: " << mensagem;
+    cout << "\nA mensagem recebida foi: " << mensagem << endl;
 }
 
 vector <int> MeioDeComunicacao::Comunicacao(vector <int> fluxoBrutoDeBits){

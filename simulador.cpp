@@ -5,11 +5,12 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <conio.h>
 using namespace std;
 
 int main(){
     CamadaAplicacao camadaAplicacao;
     camadaAplicacao.Transmissora();
-    getchar();
+    getch();
     return 0;
 }
