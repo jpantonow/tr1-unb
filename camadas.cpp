@@ -207,8 +207,11 @@ void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codi
     cout << "A mensagem codificada pode ser representada por: " << endl;
     for(int i=0;i<fluxoBrutoDeBits.size(); i++){
         if(codificacao==2){
-            if(i%8 == 0){
+            if((i%8 == 0) & (fluxoBrutoDeBits[i] == 0)){
             cout <<"\n0" << fluxoBrutoDeBits[i];
+        }
+        else if((i%8 == 0) & (fluxoBrutoDeBits[i] != 0)){
+            cout <<"\n" << fluxoBrutoDeBits[i];
         }
         else{
         if(fluxoBrutoDeBits[i] == 11 or fluxoBrutoDeBits[i] == 10){
