@@ -99,14 +99,62 @@ class CamadaFisicaTransmissora: public Camada {
  */
 class CamadaFisicaReceptora: public Camada {
     public:
+    /**
+     * @brief Método que converte codificação binária em bits.
+     * 
+     * @param quadro 
+     * @return vector <int> 
+     */
     vector <int> ConversorBinarioBits(vector <int> quadro);
+    /**
+     * @brief Método que converte codificação manchester em bits.
+     * 
+     * @param quadro 
+     * @return vector <int> 
+     */
     vector <int> ConversorManchesterBits(vector <int> quadro);
+    /**
+     * @brief Método que converte codificação bipolar em bits.
+     * 
+     * @param quadro 
+     * @return vector <int> 
+     */
     vector <int> ConversorBipolarBits(vector <int> quadro);
+    /**
+     * @brief Método que converte bits em strings.
+     * 
+     * @param bitstream 
+     * @return string 
+     */
     string ConversorBitString(vector<int> bitstream);
+    /**
+     * @brief Método que recebe a codificação binária e decodifica em uma mensagem.
+     * 
+     * @param quadro 
+     * @return string 
+     */
     string ReceptoraBinaria(vector <int> quadro);
+    /**
+     * @brief Método que recebe a codificação manchester e decodifica em uma mensagem.
+     * 
+     * @param quadro 
+     * @return string 
+     */
     string ReceptoraManchester(vector <int> quadro);
+    /**
+     * @brief Método que recebe a codificação bipolar e decodifica em uma mensagem.
+     * 
+     * @param quadro 
+     * @return string 
+     */
     string ReceptoraBipolar(vector <int> quadro);
 };
+/**
+ * @brief Classe que representa a camada de aplicação.
+ * 
+ * 
+ * 
+ */
 class CamadaAplicacao: public Camada {
     private:
     const static int BINARIA = 0;
