@@ -20,7 +20,7 @@ class Camada {
 /**
  * @brief Classe que representa a camada física transmissora.
  * 
- * Herda no modo public a classe Camada.
+ * Herda no modo public os atributos da classe Camada.
  * 
  * Representa a camada que irá codificar a mensagem e transmití-la adiante.
  * 
@@ -90,6 +90,13 @@ class CamadaFisicaTransmissora: public Camada {
      */
     vector <int> ConversorStringBits(string mensagem);
 };
+/**
+ * @brief Classe que representa a camada física receptora.
+ * 
+ * Herda no modo public os atributos da classe Camada.
+ * 
+ * Representa a camada que irá receber a mensagem codificada e irá decodificá-la novamente.
+ */
 class CamadaFisicaReceptora: public Camada {
     public:
     vector <int> ConversorBinarioBits(vector <int> quadro);
