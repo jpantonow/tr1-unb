@@ -1,88 +1,253 @@
 #include "camadafisica.hpp"
-#include <iostream>
-#include <string>
-#include <cmath>
-#include <vector>
+#include <bitset>
+#include <math.h>
 using namespace std;
 
-void main(){
-    AplicacaoTransmissora();
+vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
+    vector <int> mensagemBitStream;
+
+    for (int i {}; i < mensagem.size(); ++i) {
+        bitset<8> bits(mensagem[i]);
+        string bitsString =  bits.to_string();
+        for (int j {}; j < bitsString.size(); ++j) {
+            int bit = static_cast<int>(bitsString[j]);
+            mensagemBitStream.push_back(bit-48);
+        }
+    }
+    return mensagemBitStream;
 }
 
-void AplicacaoTransmissora(){
+string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream){
     string mensagem;
-    cout << "Digite uma mensagem:" << endl;
-    cin >> mensagem;
+    vector <int> resultado;
+for(int i = 0;i<bitstream.size();i++){
+    if(i%8 == 0){
+        int soma = 0;
+        for(int j = 0; j < resultado.size(); j++) {
+            int a = int(pow(2,j));
+            soma += int(resultado[7-j]*a);
+        }
+        char caractere;
+        caractere = char(soma);
+        mensagem += caractere;
+        resultado.clear();
+        resultado.push_back(bitstream[i]);
+        soma = 0;
+    }
+    else if(i==bitstream.size()-1){
+        resultado.push_back(bitstream[i]);
+        int soma = 0;
+        for(int j = 0; j < resultado.size(); j++) {
+            int a = int(pow(2,j));
+            soma += int(resultado[7-j]*a);
+        }
+        char caractere;
+        caractere = char(soma);
+        mensagem += caractere;
+        resultado.clear();
+        resultado.push_back(bitstream[i]);
+        soma = 0;
+    }
+    else{
+     resultado.push_back(bitstream[i]);
+    }
+ }
+ return mensagem;
+ }
 
-    CamadaDeAplicacaoTransmissora(mensagem);
+void CamadaAplicacao::Transmissora(){
+cout << "Escolha uma mensagem a ser codificada: " << endl;
+getline(cin, mensagem);
+cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
+cout << "0 - Binaria" << endl;
+cout << "1 - Manchester" << endl;
+cout << "2 - Bipolar" << endl;
+cout << "Sua escolha: ";
+cin >> codificacao;
+CamadaFisicaTransmissora camadaFisicaTransmissora;
+camadaFisicaTransmissora.iniciar(codificacao,mensagem);
 }
 
-void CamadaDeAplicacaoTransmissora(string mensagem){
-    CamadaFisicaTransmissora(quadro);
-}
-
-void CamadaFisicaTransmissora(int quadro[]){
-    int codificacao;
-    int fluxoBrutoDeBits [];
+void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem){
+    CamadaAplicacao camadaAplicacao;
+    MeioDeComunicacao meioDeComunicacao;
     switch(codificacao){
-    case 0:
-            fluxoBrutoDeBits = CamadaFisicaTransmissoraBinaria(quadro);
+        case BINARIA:
+            quadro = ConversorStringBits(mensagem);
+            fluxoBrutoDeBits = TransmissoraBinaria(quadro);
             break;
-        case 1:
-            fluxoBrutoDeBits = CamadaFisicaTransmissoraManchester(quadro);
+        case MANCHESTER:
+            quadro = ConversorStringBits(mensagem);
+            fluxoBrutoDeBits = TransmissoraManchester(quadro);
             break;
-        case 2:
-            fluxoBrutoDeBits = CamadaFisicaTransmissoraBipolar(quadro);
+        case BIPOLAR:
+            quadro = ConversorStringBits(mensagem);
+            fluxoBrutoDeBits = TransmissoraBipolar(quadro);
             break;
 }
-CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
+vector <int> fluxoComunicado = meioDeComunicacao.Comunicacao(fluxoBrutoDeBits);
+camadaAplicacao.Receptora(fluxoComunicado, codificacao);
+}
+vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro){
+    return quadro;
 }
 
-int CamadaFisicaTransmissoraBinaria(){
+vector <int> CamadaFisicaTransmissora::TransmissoraManchester(vector <int> quadro){
+    vector <int> tremDeBits;
+    for(int i = 0; i < quadro.size(); i++){
+        tremDeBits.push_back(CLOCK[0] ^ quadro[i]);
+        tremDeBits.push_back(CLOCK[1] ^ quadro[i]);
+    }
+    
+    return tremDeBits;
 
 }
-int CamadaFisicaTransmissoraManchester(){
+vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro){
+    vector <int> tremDeBits;
+    int sinal {};
+    for(int i = 0; i < quadro.size(); ++i) {
+        if (quadro[i]) {
+            if (sinal) {
+                tremDeBits.push_back(11);
+                sinal = 0;
+            } else {
+                tremDeBits.push_back(10);
+                sinal = 1;
+            }
+        } else {
+            tremDeBits.push_back(0);
+    }
+}
+return tremDeBits;
+}
+
+vector <int> CamadaFisicaReceptora::ConversorManchesterBits (vector <int> quadro) {
+    vector <int> bitstream;
+
+    for (int i = 0; i < quadro.size()/2; ++i) {
+        if (quadro[i*2]) {
+            bitstream.push_back(1);
+        } else {
+            bitstream.push_back(0);
+        }
+    }
+    return bitstream;
+}
+
+ vector <int> CamadaFisicaReceptora::ConversorBinarioBits (vector <int> quadro) {
+     vector <int> bitstream;
+     for (int i = 0; i < quadro.size(); ++i) {
+         if (quadro[i]) {
+             bitstream.push_back(1);
+         } else {
+             bitstream.push_back(0);
+         }
+     }
+ 
+     return bitstream;
+ }
+
+vector <int> CamadaFisicaReceptora::ConversorBipolarBits (vector <int> quadro) {
+    vector <int> bitstream;
+
+    for (int i = 0; i < quadro.size(); ++i) {
+        if (quadro[i]) {
+            bitstream.push_back(1);
+        } else {
+            bitstream.push_back(0);
+        }
+    }
+ 
+    return bitstream;
+}
+
+string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro){
+    string mensagem = ConversorBitString(quadro);
+    return mensagem;
+}
+
+string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro){
+    vector <int> bitstream = ConversorManchesterBits(quadro);
+    string mensagem = ConversorBitString(bitstream);
+    return mensagem;
+}
+
+string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits){
+    vector <int> bitstream = ConversorBipolarBits(tremDeBits);
+    string mensagem = ConversorBitString(bitstream);
+    return mensagem;
+}
+vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao){
+    MensagemCodificada(fluxoBrutoDeBits, codificacao);
+    CamadaFisicaReceptora receptora;
+    string mensagem;
+
+    switch(codificacao){
+        case BINARIA:
+        {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits);
+            MensagemRecebida(mensagem);
+            break;
+        }
+        case MANCHESTER:
+        {   mensagem = receptora.ReceptoraManchester(fluxoBrutoDeBits);
+            MensagemRecebida(mensagem);
+            break;
+        }
+        case BIPOLAR:
+        {   
+            mensagem = receptora.ReceptoraBipolar(fluxoBrutoDeBits);
+            MensagemRecebida(mensagem);
+            break;
+        }
+    }
 
 }
-int CamadaFisicaTransmissoraBipolar(){
 
+void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codificacao){
+    cout << "A mensagem codificada pode ser representada por: " << endl;
+    for(int i=0;i<fluxoBrutoDeBits.size(); i++){
+        if(codificacao==2){
+            if((i%8 == 0) & (fluxoBrutoDeBits[i] == 0)){
+            cout <<"\n0" << fluxoBrutoDeBits[i];
+        }
+        else if((i%8 == 0) & (fluxoBrutoDeBits[i] != 0)){
+            cout <<"\n" << fluxoBrutoDeBits[i];
+        }
+        else{
+        if(fluxoBrutoDeBits[i] == 11 or fluxoBrutoDeBits[i] == 10){
+            cout << " " << fluxoBrutoDeBits[i];
+        }
+        else{
+            cout << " 0" << fluxoBrutoDeBits[i];
+        }
+        }
+        }
+        else{
+        if(i%8 == 0){
+            cout <<"\n" << fluxoBrutoDeBits[i];
+        }
+        else{
+        if(fluxoBrutoDeBits[i] == 11 or fluxoBrutoDeBits[i] == 10){
+            cout << " " << fluxoBrutoDeBits[i];
+        }
+        else{
+            cout << "  " << fluxoBrutoDeBits[i];
+        }
+        }
+    }
+    }
 }
 
-void MeioDeComunicacao(int fluxoBrutoDeBits){
-    int fluxoBrutoDeBitsPontoA[], fluxoBrutoDeBitsPontoB[];
+void CamadaAplicacao::MensagemRecebida(string mensagem){
+    cout << "\n";
+    cout << "\nA mensagem recebida foi: " << mensagem << endl;
+}
+
+vector <int> MeioDeComunicacao::Comunicacao(vector <int> fluxoBrutoDeBits){
+    vector <int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    while(fluxoBrutoDeBitsPontoB.length() != fluxoBrutoDeBitsPontoa){
-        fluxoBrutoDeBitsPontoB += fluxoBrutoDeBitsPontoA;
+    for(int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++){
+        fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA[i]);       
     }
-    CamadaFisicaReceptora(fluxoBrutoDeBitsPontoB);
-}
-
-void CamadaFisicaReceptora(int quadro){
-    int codificacao = 0;
-    int fluxoBrutoDeBits[];
-    switch(codificacao){
-        case 0:
-        fluxoBrutoDeBits = CamadaFisicaReceptoraBinaria(quadro);
-        break;
-        case 1:
-        fluxoBrutoDeBits = CamadaFisicaReceptoraManchester(quadro);
-        break;
-        case 2:
-        fluxoBrutoDeBits = CamadaFisicaReceptoraBipolar(quadro);
-        break;
-    }
-    CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
-}
-int CamadaFisicaReceptoraBinaria(int quadro){
-
-}
-int CamadaFisicaReceptoraManchester(int quadro){
-}
-int CamadaFisicaReceptoraBipolar(int quadro){}
-
-void CamadaDeAplicacaoReceptora(int quadro){
-    AplicacaoReceptora(mensagem);
-}
-void AplicacaoReceptora(string mensagem){
-    cout << "A mensagem recebida foi:" << mensagem << endl;
+    return fluxoBrutoDeBitsPontoB;
 }
