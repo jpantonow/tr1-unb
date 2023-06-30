@@ -104,15 +104,21 @@ void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem) {
     MeioDeComunicacao meioDeComunicacao;
     switch (codificacao) {
         case BINARIA:
+            //converte as strings em bits
             quadro = ConversorStringBits(mensagem);
+            //repassa o resultado para a camada física transmissora binária
             fluxoBrutoDeBits = TransmissoraBinaria(quadro);
             break;
         case MANCHESTER:
+            //converte as strings em bits
             quadro = ConversorStringBits(mensagem);
+            //repassa o resultado para a camada física transmissora manchester
             fluxoBrutoDeBits = TransmissoraManchester(quadro);
             break;
         case BIPOLAR:
+            //converte as strings em bits
             quadro = ConversorStringBits(mensagem);
+             //repassa o resultado para a camada física transmissora bipolar
             fluxoBrutoDeBits = TransmissoraBipolar(quadro);
             break;
 }
