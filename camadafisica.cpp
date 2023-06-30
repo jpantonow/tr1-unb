@@ -16,29 +16,42 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     }
     return mensagemBitStream;
 }
-
+/**
+ * @brief Método que converte bits em string.
+ * 
+ * Utiliza conceitos relativos à tabela ASCII para a conversão.
+ * 
+ * Método que simula a decodificação da mensagem.
+ * 
+ * Síntese do método: converter o byte para um número decimal e descobrir correspondente de cada letra em char.
+ * 
+ * Final do método: concatenação de caracteres
+ * 
+ * @param bitstream 
+ * @return string 
+ */
 string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream) {
     string mensagem;
     vector <int> resultado;
     for(int i = 0; i < bitstream.size(); i++) {
-        if (i % 8 == 0) {
-            int soma = 0;
+        if (i % 8 == 0) { // Indica se formou um byte
+            int soma = 0; //Acumulação da soma
             for (int j = 0; j < resultado.size(); j++) {
                 int a = int(pow(2, j));
-                soma += int(resultado[7-j]*a);
+                soma += int(resultado[7-j]*a); //Soma que acumula o número decimal correspondente
             }
             char caractere;
-            caractere = char(soma);
+            caractere = char(soma); //conversão para caractere
             mensagem += caractere;
             resultado.clear();
             resultado.push_back(bitstream[i]);
             soma = 0;
-        } else if(i == bitstream.size() -1) {
+        } else if(i == bitstream.size() -1) { //se for o último bit do conjunto
             resultado.push_back(bitstream[i]);
             int soma = 0;
             for (int j = 0; j < resultado.size(); j++) {
                 int a = int(pow(2, j));
-                soma += int(resultado[7-j] *a);
+                soma += int(resultado[7-j] *a); //Soma que acumula o número decimal correspondente
             }
             char caractere;
             caractere = char(soma);
@@ -53,6 +66,14 @@ string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream) {
     return mensagem;
 }
 
+/**
+ * @brief Método que começa a simulação.
+ * 
+ * O usuário insere uma mensagem e escolhe a codificação que ela será transmitida.
+ * 
+ * Após a inserção das informações, inicia-se a transmissão via camada física transmissora.
+ * 
+ */
 void CamadaAplicacao::Transmissora() {
     cout << "Escolha uma mensagem a ser codificada: " << endl;
     getline(cin, mensagem);
