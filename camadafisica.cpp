@@ -122,13 +122,27 @@ void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem) {
             fluxoBrutoDeBits = TransmissoraBipolar(quadro);
             break;
 }
+//Passa o fluxo bruto de bits para o meio de comunicação
 vector <int> fluxoComunicado = meioDeComunicacao.Comunicacao(fluxoBrutoDeBits);
+//Passa o fluxo ja comunicado junto da codificação escolhida
     camadaAplicacao.Receptora(fluxoComunicado, codificacao);
 }
+/**
+ * @brief Camada Física Transmissora binária recebe os bits e os repassa.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro) {
     return quadro;
 }
 
+/**
+ * @brief Camada Física Transmissora Manchester recebe os bits e os codifica em Manchester, repassando-os ao final do método.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaFisicaTransmissora::TransmissoraManchester(vector <int> quadro) {
     vector <int> tremDeBits;
     for (int i = 0; i < quadro.size(); i++) {
@@ -139,6 +153,12 @@ vector <int> CamadaFisicaTransmissora::TransmissoraManchester(vector <int> quadr
     return tremDeBits;
 }
 
+/**
+ * @brief Camada Física Transmissora Bipolar recebe os bits e os codifica em Bipolar, repassando-os ao final do método.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro) {
     vector <int> tremDeBits;
     int sinal {};
