@@ -87,6 +87,18 @@ void CamadaAplicacao::Transmissora() {
     camadaFisicaTransmissora.iniciar(codificacao, mensagem);
 }
 
+/**
+ * @brief Método que simula a camada física transmissora.
+ * 
+ * Recebe a mensagem e a codifica na codificação escolhida.
+ * 
+ * Após codificada a mensagem, repassa o resultado para a camada física tranmissora, que retornará o fluxo bruto de bits.
+ * 
+ * Ao final do método, repassa o fluxo bruto de bits pelo meio de comunicação, e, após comunicado, transmite à camada de aplicação receptora.
+ * 
+ * @param codificacao 
+ * @param mensagem 
+ */
 void CamadaFisicaTransmissora::iniciar(int codificacao, string mensagem) {
     CamadaAplicacao camadaAplicacao;
     MeioDeComunicacao meioDeComunicacao;
