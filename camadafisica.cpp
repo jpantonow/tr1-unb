@@ -307,6 +307,14 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) 
     }
 }
 
+/**
+ * @brief Método demonstrativo para ilustrar como seria a mensagem codificada.
+ * 
+ * De acordo com o respectivo tipo de codificação, imprime a mensagem codificada. 
+ * 
+ * @param fluxoBrutoDeBits 
+ * @param codificacao 
+ */
 void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codificacao) {
     cout << "A mensagem codificada pode ser representada por: " << endl;
     for (int i=0; i < fluxoBrutoDeBits.size(); i++) {
@@ -335,12 +343,24 @@ void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codi
     }
     }
 }
-
+/**
+ * @brief Método para imprimir uma mensagem.
+ * 
+ * @param mensagem 
+ */
 void CamadaAplicacao::MensagemRecebida(string mensagem) {
     cout << "\n";
     cout << "\nA mensagem recebida foi: " << mensagem << endl;
 }
 
+/**
+ * @brief Método para simular um meio de comunicação.
+ * 
+ * Transporta um fluxo bruto de bits entre dois pontos.
+ * 
+ * @param fluxoBrutoDeBits 
+ * @return vector <int> 
+ */
 vector <int> MeioDeComunicacao::Comunicacao(vector <int> fluxoBrutoDeBits) {
     vector <int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
