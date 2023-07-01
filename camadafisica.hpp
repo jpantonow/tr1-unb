@@ -192,7 +192,7 @@ class CamadaAplicacao: public Camada {
      * @param codificacao 
      * @return vector <int> 
      */
-    vector <int> Receptora(vector <int> fluxoBrutoDeBits, int codificacao);
+    void Receptora(vector <int> fluxoBrutoDeBits, int codificacao);
     /**
      * @brief Método demonstrativo para representar como seria a mensagem codificada.
      * 
