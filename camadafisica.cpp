@@ -272,7 +272,17 @@ string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits) {
     string mensagem = ConversorBitString(bitstream);
     return mensagem;
 }
-vector <int> CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
+/**
+ * @brief Método que simula a camada de aplicação receptora.
+ * 
+ * De acordo com a codificação escolhida, realiza os mecanismos pra receber a mensagem e convertê-la em string.
+ * 
+ * Ao final do processo, imprime a mensagem decodificada.
+ * 
+ * @param fluxoBrutoDeBits 
+ * @param codificacao 
+ */
+void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
     MensagemCodificada(fluxoBrutoDeBits, codificacao);
     CamadaFisicaReceptora receptora;
     string mensagem;
