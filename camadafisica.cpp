@@ -155,9 +155,9 @@ vector <int> CamadaFisicaTransmissora::TransmissoraBinaria(vector <int> quadro) 
  */
 vector <int> CamadaFisicaTransmissora::TransmissoraManchester(vector <int> quadro) {
     vector <int> tremDeBits;
-    for (int i = 0; i < quadro.size(); i++) {
-        tremDeBits.push_back(CLOCK[0] ^ quadro[i]);
-        tremDeBits.push_back(CLOCK[1] ^ quadro[i]);
+    for (int i = 0; i < quadro.size(); i++) { 
+        tremDeBits.push_back(CLOCK[0] ^ quadro[i]); //realização de XOR entre o bit 0 do clock e o bit do quadro
+        tremDeBits.push_back(CLOCK[1] ^ quadro[i]); //realização de XOR entre o bit 1 do clock e o bit do quadro
     }
 
     return tremDeBits;
@@ -187,12 +187,17 @@ vector <int> CamadaFisicaTransmissora::TransmissoraBipolar(vector <int> quadro) 
 }
 return tremDeBits;
 }
-
+/**
+ * @brief Método que converte uma mensagem na codificação manchester para bits.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaFisicaReceptora::ConversorManchesterBits(vector <int> quadro) {
     vector <int> bitstream;
 
     for (int i = 0; i < quadro.size()/2; ++i) {
-        if (quadro[i*2]) {
+        if (quadro[i*2]) { 
             bitstream.push_back(1);
         } else {
             bitstream.push_back(0);
