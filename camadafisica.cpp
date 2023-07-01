@@ -3,6 +3,14 @@
 #include <bitset>
 using namespace std;
 
+/**
+ * @brief Método que transforma string em bits.
+ * 
+ * Simula um conversor de mensagem para binário.
+ * 
+ * @param mensagem 
+ * @return vector <int> 
+ */
 vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     vector <int> mensagemBitStream;
 
@@ -16,6 +24,8 @@ vector <int> CamadaFisicaTransmissora::ConversorStringBits(string mensagem) {
     }
     return mensagemBitStream;
 }
+
+
 /**
  * @brief Método que converte bits em string.
  * 
@@ -191,6 +201,12 @@ vector <int> CamadaFisicaReceptora::ConversorManchesterBits(vector <int> quadro)
     return bitstream;
 }
 
+/**
+ * @brief Método que decodifica a mensagem codificada em binário para bits.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaFisicaReceptora::ConversorBinarioBits(vector <int> quadro) {
     vector <int> bitstream;
     for (int i = 0; i < quadro.size(); ++i) {
@@ -203,7 +219,12 @@ vector <int> CamadaFisicaReceptora::ConversorBinarioBits(vector <int> quadro) {
 
     return bitstream;
 }
-
+/**
+ * @brief Método que decodifica a mensagem codificada em bipolar para bits.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaFisicaReceptora::ConversorBipolarBits(vector <int> quadro) {
     vector <int> bitstream;
 
@@ -218,17 +239,34 @@ vector <int> CamadaFisicaReceptora::ConversorBipolarBits(vector <int> quadro) {
     return bitstream;
 }
 
+/**
+ * @brief Método que recebe a mensagem codificada em binário e a decodifica, retornando a mensagem.
+ * 
+ * @param quadro 
+ * @return string 
+ */
 string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro) {
-    string mensagem = ConversorBitString(quadro);
+    vector <int> bitstream = ConversorBinarioBits(quadro);
+    string mensagem = ConversorBitString(bitstream);
     return mensagem;
 }
-
+/**
+ * @brief Método que recebe a mensagem codificada em manchester e a decodifica, retornando a mensagem.
+ * 
+ * @param quadro 
+ * @return string 
+ */
 string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro) {
     vector <int> bitstream = ConversorManchesterBits(quadro);
     string mensagem = ConversorBitString(bitstream);
     return mensagem;
 }
-
+/**
+ * @brief Método que recebe a mensagem codificada em bipolar e a decodifica, retornando a mensagem.
+ * 
+ * @param tremDeBits 
+ * @return string 
+ */
 string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits) {
     vector <int> bitstream = ConversorBipolarBits(tremDeBits);
     string mensagem = ConversorBitString(bitstream);
