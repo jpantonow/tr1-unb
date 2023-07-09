@@ -1,88 +1,61 @@
-// #include "camadafisica.hpp"
-// #include <iostream>
-// #include <string>
-// #include <cmath>
-// #include <vector>
-// using namespace std;
+#include <vector>
+#include <iostream>
+using namespace std;
+void CamadaEnlaceDadosTransmissora(int quadro[]){
+    CamadaEnlaceDadosTransmissoraEnquadramento(quadro);
+    CamadaEnlaceDadosTransmissoraControleDeErro(quadro);
+    CamadaFisicaTransmissora(quadro);
+}
 
-// void main(){
-//     AplicacaoTransmissora();
-// }
+void CamadaEnlaceDadosTransmissoraEnquadramento(int quadro[]){
+    int tipoDeEnquadramento = 0;
+    vector <int> quadroEnquadrado;
+    switch(tipoDeEnquadramento){
+        case 0: //contagem de caracteres
+            quadroEnquadrado = 
+            CamadaEnlaceTransmissoraEnquadramentoContagemDeCaracteres(quadro);
+            break;
+        case 1:
+            quadroEnquadrado = camadaEnlaceTransmissoraEnquadramentoInsercaoDeBytes(quadro);
+            break;
 
-// void AplicacaoTransmissora(){
-//     string mensagem;
-//     cout << "Digite uma mensagem:" << endl;
-//     cin >> mensagem;
+    }
+}
+void CamadaEnlaceDadosTransmissoraControleDeErro(int quadro[]){
 
-//     CamadaDeAplicacaoTransmissora(mensagem);
-// }
+}
+void  CamadaEnlaceTransmissoraEnquadramentoContagemDeCaracteres(int quadro[]){
 
-// void CamadaDeAplicacaoTransmissora(string mensagem){
-//     CamadaFisicaTransmissora(quadro);
-// }
+}
+void camadaEnlaceTransmissoraEnquadramentoInsercaoDeBytes(int quadro[]){
 
-// void CamadaFisicaTransmissora(int quadro[]){
-//     int codificacao;
-//     int fluxoBrutoDeBits [];
-//     switch(codificacao){
-//     case 0:
-//             fluxoBrutoDeBits = CamadaFisicaTransmissoraBinaria(quadro);
-//             break;
-//         case 1:
-//             fluxoBrutoDeBits = CamadaFisicaTransmissoraManchester(quadro);
-//             break;
-//         case 2:
-//             fluxoBrutoDeBits = CamadaFisicaTransmissoraBipolar(quadro);
-//             break;
-// }
-// CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
-// }
+}
 
-// int CamadaFisicaTransmissoraBinaria(){
+//recepcao
+void CamadaEnlaceDadosReceptora(int quadro[]){
+    CamadaEnlaceDadosReceptoraEnquadramento(quadro);
+    CamadaEnlaceDadosReceptoraControleDeErro(quadro);
+    CamadaAplicacaoReceptora(quadro);
+}
+void CamadaEnlaceDadosReceptoraEnquadramento(int quadro[]){
+     int tipoDeEnquadramento = 0;
+    vector <int> quadroDesenquadrado;
+    switch(tipoDeEnquadramento){
+        case 0: //contagem de caracteres
+            quadroDesenquadrado = 
+            CamadaEnlaceTransmissoraEnquadramentoContagemDeCaracteres(quadro);
+            break;
+        case 1:
+            quadroDesenquadrado = camadaEnlaceTransmissoraEnquadramentoInsercaoDeBytes(quadro);
+            break;
 
-// }
-// int CamadaFisicaTransmissoraManchester(){
+    }
+}
+void CamadaEnlaceDadosReceptoraControleDeErro(int quadro[]){
+}
+void  CamadaEnlaceReceptoraEnquadramentoContagemDeCaracteres(int quadro[]){
 
-// }
-// int CamadaFisicaTransmissoraBipolar(){
+}
+void camadaEnlaceReceptoraEnquadramentoInsercaoDeBytes(int quadro[]){
 
-// }
-
-// void MeioDeComunicacao(int fluxoBrutoDeBits){
-//     int fluxoBrutoDeBitsPontoA[], fluxoBrutoDeBitsPontoB[];
-//     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-//     while(fluxoBrutoDeBitsPontoB.length() != fluxoBrutoDeBitsPontoa){
-//         fluxoBrutoDeBitsPontoB += fluxoBrutoDeBitsPontoA;
-//     }
-//     CamadaFisicaReceptora(fluxoBrutoDeBitsPontoB);
-// }
-
-// void CamadaFisicaReceptora(int quadro){
-//     int codificacao = 0;
-//     int fluxoBrutoDeBits[];
-//     switch(codificacao){
-//         case 0:
-//         fluxoBrutoDeBits = CamadaFisicaReceptoraBinaria(quadro);
-//         break;
-//         case 1:
-//         fluxoBrutoDeBits = CamadaFisicaReceptoraManchester(quadro);
-//         break;
-//         case 2:
-//         fluxoBrutoDeBits = CamadaFisicaReceptoraBipolar(quadro);
-//         break;
-//     }
-//     CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
-// }
-// int CamadaFisicaReceptoraBinaria(int quadro){
-
-// }
-// int CamadaFisicaReceptoraManchester(int quadro){
-// }
-// int CamadaFisicaReceptoraBipolar(int quadro){}
-
-// void CamadaDeAplicacaoReceptora(int quadro){
-//     AplicacaoReceptora(mensagem);
-// }
-// void AplicacaoReceptora(string mensagem){
-//     cout << "A mensagem recebida foi:" << mensagem << endl;
-// }
+}
