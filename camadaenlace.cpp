@@ -9,6 +9,16 @@ vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro){
 int cont = 0;
 vector <int> enquadrado;
 while(!quadro.empty()){
+    if(cont==0){
+        enquadrado.push_back(0);
+        enquadrado.push_back(0);
+        enquadrado.push_back(0);
+        enquadrado.push_back(0);
+        enquadrado.push_back(1);
+        enquadrado.push_back(0);
+        enquadrado.push_back(0);
+        enquadrado.push_back(0);
+    }
     if(cont==7){
         cont = 0;
         enquadrado.push_back(quadro[0]);
