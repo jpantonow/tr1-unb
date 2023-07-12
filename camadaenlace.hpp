@@ -15,7 +15,7 @@ class CamadaEnlace{
 
 class CamadaEnlaceTransmissora: public CamadaEnlace {
     public:
-        int ContagemDeCaracteres(vector <int> quadro); 
+        vector <int> ContagemDeCaracteres(vector <int> quadro); 
         vector <int> InsercaoDeBytes(vector <int> quadro);
         vector <int> ControleDeErroCRC(vector <int> quadro);
         vector <int> ControleDeErroBitParidadePar(vector <int> quadro);
