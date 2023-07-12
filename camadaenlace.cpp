@@ -46,7 +46,14 @@ while(!quadro.empty()){
         cont = 0;
         enquadrado.push_back(quadro[0]);
         quadro.pop_back();
-        enquadrado.push_back(quadro[0]);
+        enquadrado.push_back(0);
+        enquadrado.push_back(1);
+        enquadrado.push_back(1);
+        enquadrado.push_back(1);
+        enquadrado.push_back(1);
+        enquadrado.push_back(1);
+        enquadrado.push_back(1);
+        enquadrado.push_back(0);
         continue;
     }
     cont +=1;
