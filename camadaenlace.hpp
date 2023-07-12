@@ -9,6 +9,8 @@ using namespace std;
 class CamadaEnlace{
     public:
     vector <int> quadroEnquadrado;
+    vector <int> crc{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
+                              0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
     int tipoDeEnquadramento = 0;
 };
 
