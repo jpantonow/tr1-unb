@@ -55,4 +55,11 @@ class CamadaAplicacao: public Camada {
      * 
      */
     void MensagemRecebida(string);
+    /**
+     * @brief Método que recebe a string mensagem e a transforma em bits.
+     * 
+     * @param mensagem 
+     * @return vector <int> 
+     */
+    vector <int> ConversorStringBits(string mensagem);
 };

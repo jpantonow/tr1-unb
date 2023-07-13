@@ -5,10 +5,7 @@ int cont = 0;
 vector <int> enquadrado;
 int size = quadro.size();
 
-if(size>255){
-
-}
-else{}
+//else{}
 // while(!quadro.empty()){
 //     if(cont==0){
 //         enquadrado.push_back(0);

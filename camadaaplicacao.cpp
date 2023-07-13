@@ -25,6 +25,27 @@ void CamadaAplicacao::Transmissora() {
     CamadaFisicaTransmissora camadaFisicaTransmissora;
     camadaFisicaTransmissora.iniciar(codificacao, mensagem);
 }
+/**
+ * @brief Método que transforma string em bits.
+ * 
+ * Simula um conversor de mensagem para binário.
+ * 
+ * @param mensagem 
+ * @return vector <int> 
+ */
+vector <int> CamadaAplicacao::ConversorStringBits(string mensagem) {
+    vector <int> mensagemBitStream;
+
+    for (int i {}; i < mensagem.size(); ++i) {
+        bitset<8> bits(mensagem[i]);
+        string bitsString =  bits.to_string();
+        for (int j {}; j < bitsString.size(); ++j) {
+            int bit = static_cast<int>(bitsString[j]);
+            mensagemBitStream.push_back(bit-48);
+        }
+    }
+    return mensagemBitStream;
+}
 
 /**
  * @brief Método que simula a camada de aplicação receptora.

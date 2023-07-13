@@ -83,14 +83,7 @@ class CamadaFisicaTransmissora: public Camada {
      * @return vector <int> 
      */
     vector <int> TransmissoraBipolar(vector <int> quadro);
-    /**
-     * @brief Método que recebe a string mensagem e a transforma em bits.
-     * 
-     * @param mensagem 
-     * @return vector <int> 
-     */
-    vector <int> ConversorStringBits(string mensagem);
-};
+    };
 /**
  * @brief Classe que representa a camada física receptora.
  * 
