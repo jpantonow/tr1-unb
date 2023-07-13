@@ -15,6 +15,7 @@ class Camada {
     vector <int> quadro;
     vector <int> fluxoBrutoDeBits;
     int codificacao;
+    int enquadramento;
 };
 
 /**

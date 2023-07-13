@@ -11,6 +11,11 @@
 void CamadaAplicacao::Transmissora() {
     cout << "Escolha uma mensagem a ser codificada: " << endl;
     getline(cin, mensagem);
+    cout << "Escolha um tipo de enquadramento a ser utilizado:" << endl;
+    cout << "0 - Contagem de Caracteres" << endl;
+    cout << "1 - Inserção de Bytes" << endl;
+    cout << "Sua escolha: " << endl;
+    cin >> enquadramento;
     cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
     cout << "0 - Binaria" << endl;
     cout << "1 - Manchester" << endl;
