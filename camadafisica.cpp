@@ -1,5 +1,6 @@
 #include <math.h>
-#include "./camadafisica.hpp"
+//#include "./camadafisica.hpp"
+#include "camadaaplicacao.cpp"
 #include <bitset>
 using namespace std;
 
