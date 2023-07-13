@@ -16,6 +16,7 @@ class Camada {
     vector <int> fluxoBrutoDeBits;
     int codificacao;
     int enquadramento;
+    int erro;
 };
 
 /**

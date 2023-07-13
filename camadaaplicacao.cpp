@@ -16,6 +16,10 @@ void CamadaAplicacao::Transmissora() {
     cout << "1 - Inserção de Bytes" << endl;
     cout << "Sua escolha: " << endl;
     cin >> enquadramento;
+    cout << "Escolha um tipo de erro: " << endl;
+    cout << "0: Bit de paridade par" << endl;
+    cout << "1: CRC" << endl;
+    cin >> erro;   
     cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
     cout << "0 - Binaria" << endl;
     cout << "1 - Manchester" << endl;
