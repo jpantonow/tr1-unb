@@ -77,27 +77,6 @@ string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream) {
 }
 
 /**
- * @brief Método que começa a simulação.
- * 
- * O usuário insere uma mensagem e escolhe a codificação que ela será transmitida.
- * 
- * Após a inserção das informações, inicia-se a transmissão via camada física transmissora.
- * 
- */
-void CamadaAplicacao::Transmissora() {
-    cout << "Escolha uma mensagem a ser codificada: " << endl;
-    getline(cin, mensagem);
-    cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
-    cout << "0 - Binaria" << endl;
-    cout << "1 - Manchester" << endl;
-    cout << "2 - Bipolar" << endl;
-    cout << "Sua escolha: ";
-    cin >> codificacao;
-    CamadaFisicaTransmissora camadaFisicaTransmissora;
-    camadaFisicaTransmissora.iniciar(codificacao, mensagem);
-}
-
-/**
  * @brief Método que simula a camada física transmissora.
  * 
  * Recebe a mensagem e a codifica na codificação escolhida.
@@ -276,86 +255,6 @@ string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits) {
     vector <int> bitstream = ConversorBipolarBits(tremDeBits);
     string mensagem = ConversorBitString(bitstream);
     return mensagem;
-}
-/**
- * @brief Método que simula a camada de aplicação receptora.
- * 
- * De acordo com a codificação escolhida, realiza os mecanismos pra receber a mensagem e convertê-la em string.
- * 
- * Ao final do processo, imprime a mensagem decodificada.
- * 
- * @param fluxoBrutoDeBits 
- * @param codificacao 
- */
-void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
-    MensagemCodificada(fluxoBrutoDeBits, codificacao);
-    CamadaFisicaReceptora receptora;
-    string mensagem;
-
-    switch (codificacao) {
-        case BINARIA:
-        {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits);
-            MensagemRecebida(mensagem);
-            break;
-        }
-        case MANCHESTER:
-        {   mensagem = receptora.ReceptoraManchester(fluxoBrutoDeBits);
-            MensagemRecebida(mensagem);
-            break;
-        }
-        case BIPOLAR:
-        {
-            mensagem = receptora.ReceptoraBipolar(fluxoBrutoDeBits);
-            MensagemRecebida(mensagem);
-            break;
-        }
-    }
-}
-
-/**
- * @brief Método demonstrativo para ilustrar como seria a mensagem codificada.
- * 
- * De acordo com o respectivo tipo de codificação, imprime a mensagem codificada. 
- * 
- * @param fluxoBrutoDeBits 
- * @param codificacao 
- */
-void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codificacao) {
-    cout << "A mensagem codificada pode ser representada por: " << endl;
-    for (int i=0; i < fluxoBrutoDeBits.size(); i++) {
-        if (codificacao == 2) {
-            if ((i%8 == 0) & (fluxoBrutoDeBits[i] == 0)) {
-            cout <<"\n0" << fluxoBrutoDeBits[i];
-        } else if ((i%8 == 0) & (fluxoBrutoDeBits[i] != 0)) {
-            cout <<"\n" << fluxoBrutoDeBits[i];
-        } else {
-            if (fluxoBrutoDeBits[i] == 11 || fluxoBrutoDeBits[i] == 10) {
-                cout << " " << fluxoBrutoDeBits[i];
-            } else {
-                cout << " 0" << fluxoBrutoDeBits[i];
-            }
-        }
-        } else {
-        if (i%8 == 0) {
-            cout <<"\n" << fluxoBrutoDeBits[i];
-        } else {
-        if (fluxoBrutoDeBits[i] == 11 || fluxoBrutoDeBits[i] == 10) {
-            cout << " " << fluxoBrutoDeBits[i];
-        } else {
-            cout << "  " << fluxoBrutoDeBits[i];
-        }
-        }
-    }
-    }
-}
-/**
- * @brief Método para imprimir uma mensagem.
- * 
- * @param mensagem 
- */
-void CamadaAplicacao::MensagemRecebida(string mensagem) {
-    cout << "\n";
-    cout << "\nA mensagem recebida foi: " << mensagem << endl;
 }
 
 /**
