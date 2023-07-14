@@ -19,6 +19,7 @@ void CamadaAplicacao::Transmissora() {
     cout << "Escolha um tipo de erro: " << endl;
     cout << "0: Bit de paridade par" << endl;
     cout << "1: CRC" << endl;
+    cout << "2: Hamming" << endl;
     cin >> erro;   
     cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
     cout << "0 - Binaria" << endl;
