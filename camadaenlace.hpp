@@ -16,6 +16,9 @@ class CamadaEnlace{
     int tipoDeEnquadramento = 0;
     vector <int> int_byte(int size);
     vector <int> inserir_bytes(vector <int> byte, vector<int> quadro);
+    vector <int> checksum(vector <int> byte);
+    vector <int> complementode1(vector <int> numero);
+    vector <int> somabinaria(vector <int>, vector<int>);
 };
 
 

@@ -26,7 +26,6 @@ using namespace std;
 //     return mensagemBitStream;
 // }
 
-
 /**
  * @brief Método que converte bits em string.
  * 

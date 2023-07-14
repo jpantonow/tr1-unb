@@ -7,7 +7,32 @@ vector <int> CamadaEnlace::int_byte(int size){
     }
     return byte;
 }
-
+vector <int> CamadaEnlace::complementode1(vector <int> numero){
+    vector<int> complemento;
+    for(int i = 0; i < numero.size(); i++){
+        if(numero[i] == 1){
+            complemento.push_back(0);
+        }
+        else{
+            complemento.push_back(1);
+        }
+    }
+    return complemento;
+}
+vector <int> CamadaEnlace::somabinaria(vector <int> numero1, vector<int> numero2){
+    int carry = 0;
+    int soma = 0;
+    vector <int> resultado;
+    for(int i = numero1.size(); i >= 0; i--){
+        int soma = numero1[i] + numero2[i] + carry;
+        resultado[i] = soma % 2;
+        carry = soma/2;
+    }
+    if(carry!=0){
+        resultado.insert(resultado.begin(), carry);
+    }
+    return resultado;
+}
 vector <int> CamadaEnlaceTransmissora::ContagemDeCaracteres(vector <int> quadro){
 int cont = 0;
 vector <int> enquadrado;
@@ -48,6 +73,10 @@ while(!quadro.empty()){
     quadro.pop_back();
 }
 return enquadrado;
+}
+vector <int> CamadaEnlace::checksum(vector <int> byte){
+    vector <int> checksum;
+    
 }
 vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> quadro){
 // 802.3 POLINOMIO GERADOR
