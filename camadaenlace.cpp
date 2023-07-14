@@ -151,7 +151,6 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tr
 
 vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> tremdebits) {
     vector <int> aux1, aux2, dividendo;
-    vector <int> polinomio{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
 
     for (int i{}; i < tremdebits.size(); i++) {
         dividendo.push_back(tremdebits[i]);
@@ -163,10 +162,10 @@ vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> tremdebits
     }
 
     for (int i{}; i < tremdebits.size(); i++){
-        aux1.push_back(dividendo[polinomio.size() + i]);
-        for (int j{}; j < polinomio.size(); j++) {
+        aux1.push_back(dividendo[crc.size() + i]);
+        for (int j{}; j < crc.size(); j++) {
             if (aux1[0]) {
-                aux2.push_back(aux1[j] ^ polinomio[j]);
+                aux2.push_back(aux1[j] ^ crc[j]);
             } else {
                 aux2.push_back(aux1[j] ^ 0);
             }
@@ -186,7 +185,6 @@ vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> tremdebits
 
 vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
     vector <int> aux1, aux2, dividendo;
-    vector <int> polinomio{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
 
     for (int i{}; i < tremdebits.size(); i++) {
         dividendo.push_back(tremdebits[i]);
@@ -197,11 +195,11 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
     }
 
     for (int i{}; i < tremdebits.size() - 32; i++){
-        aux1.push_back(dividendo[polinomio.size() + i - 1]);
+        aux1.push_back(dividendo[crc.size() + i - 1]);
 
-        for (int j{}; j < polinomio.size(); j++) {
+        for (int j{}; j < crc.size(); j++) {
             if (aux1[0]) {
-                aux2.push_back(aux1[j] ^ polinomio[j]);
+                aux2.push_back(aux1[j] ^ crc[j]);
             } else {
                 aux2.push_back(aux1[j] ^ 0);
             }
