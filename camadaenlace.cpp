@@ -86,27 +86,6 @@ vector <int> CamadaEnlace::dividirquadro(vector <int> quadro){
 vector <int> CamadaEnlace::checksum(vector <int> byte){
     vector <int> checksum;
 }
-vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> quadro){
-// 802.3 POLINOMIO GERADOR
-}
-
-vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> quadro){
-
-}
-
-int CamadaEnlaceReceptora::ContagemDeCaracteres(vector <int> quadro){
-
-}
-vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
-
-}
-vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
-
-}
-vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
-
-}
-
 
 vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> tremdebits) {
     int par0, par1, par2, par3;
@@ -142,7 +121,7 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 
 }
 
-vector <int> codificacaoBitParidade(vector <int> tremdebits) {
+vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
     int bit_paridade{};
 
     for (int i{}; i < tremdebits.size(); i++) {
@@ -154,7 +133,7 @@ vector <int> codificacaoBitParidade(vector <int> tremdebits) {
     return tremdebits;
 }
 
-vector <int> decodificacaoBitParidade(vector <int> tremdebits) {
+vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
     int aux{};
 
     for (int i{}; i < tremdebits.size(); i++) {
