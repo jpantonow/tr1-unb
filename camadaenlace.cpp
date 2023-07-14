@@ -50,7 +50,6 @@ vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
     return quadro;
 }
 vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro){
-//bit de flag = 01111110
 int cont = 0;
 int um5vezes = 0;
 vector <int> enquadrado;
