@@ -36,7 +36,7 @@ vector <int> CamadaEnlace::somabinaria(vector <int> numero1, vector<int> numero2
 vector <int> CamadaEnlaceTransmissora::ContagemDeCaracteres(vector <int> quadro){
 int cont = 0;
 vector <int> enquadrado;
-quadro = dividirquadro(quadro);
+//quadro = dividirquadro(quadro);
 int size = quadro.size();
 vector <int> byte = int_byte(size);
 for(int i = 0; i < byte.size(); i++){
