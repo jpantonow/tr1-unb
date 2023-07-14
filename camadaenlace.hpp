@@ -11,7 +11,11 @@ class CamadaEnlace{
     vector <int> quadroEnquadrado;
     vector <int> crc{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
                               0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
+    vector <int> flag{0,0,0,0,1,1,1,1};
+    vector <int> esc{0,0,0,0,0,1,1,0};
     int tipoDeEnquadramento = 0;
+    vector <int> int_byte(int size);
+    vector <int> inserir_bytes(vector <int> byte, vector<int> quadro);
 };
 
 
