@@ -106,3 +106,146 @@ vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
 vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
 
 }
+
+/***
+vector <int> codificacaoHamming(vector <int> tremdebits) {
+    int par0, par1, par2, par3;
+    vector <int> tremcodificado;
+
+    par0 = tremdebits[0] ^ tremdebits[1] ^ tremdebits[3] ^ tremdebits[4] ^ tremdebits[6];
+    par1 = tremdebits[0] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[5] ^ tremdebits[6];
+    par2 = tremdebits[1] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[7];
+    par3 = tremdebits[4] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[7];
+
+    tremcodificado = {par0, par1, tremdebits[0], par2, tremdebits[1], tremdebits[2], tremdebits[3], par3, tremdebits[4], tremdebits[5], tremdebits[6], tremdebits[7]};
+
+    return tremcodificado;
+}
+
+vector <int> decodificacaoHamming(vector <int> tremdebits) {
+    int pos_errada {};
+    vector <int> tremcorrigido;
+
+    pos_errada = 1 * (tremdebits[0] ^ tremdebits[2] ^ tremdebits[4] ^ tremdebits[6] ^ tremdebits[8] ^ tremdebits[10]) + 2 * (tremdebits[1] ^ tremdebits[2] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[9] ^ tremdebits[10]) + 4 * (tremdebits[3] ^ tremdebits[4] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[11]) + 8 * (tremdebits[7] ^ tremdebits[8] ^ tremdebits[9] ^ tremdebits[10] ^ tremdebits[11]);
+
+    if (pos_errada) {
+        if (tremdebits[pos_errada - 1]) {
+            tremdebits[pos_errada - 1] = 0;
+        } else {
+            tremdebits[pos_errada] = 1;
+        }
+    }
+
+    tremcorrigido = {tremdebits[2], tremdebits[4], tremdebits[5], tremdebits[6], tremdebits[8], tremdebits[9], tremdebits[10], tremdebits[11]};
+
+    return tremcorrigido;
+
+}
+
+vector <int> codificacaoBitParidade(vector <int> tremdebits) {
+    int bit_paridade{};
+
+    for (int i{}; i < tremdebits.size(); i++) {
+        bit_paridade = bit_paridade ^ tremdebits[i];
+    }
+
+    tremdebits.push_back(bit_paridade);
+
+    return tremdebits;
+}
+
+vector <int> decodificacaoBitParidade(vector <int> tremdebits) {
+    int aux{};
+
+    for (int i{}; i < tremdebits.size(); i++) {
+        aux = aux ^ tremdebits[i];
+    }
+
+    if (aux) {
+        cout << "Erro detectado no quadro!!!" << "\n";
+    }
+
+    tremdebits.pop_back();
+
+    return tremdebits;
+}
+
+vector <int> codificacaoCRC(vector <int> tremdebits) {
+    vector <int> aux1, aux2, dividendo;
+    vector <int> polinomio{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
+
+    for (int i{}; i < tremdebits.size(); i++) {
+        dividendo.push_back(tremdebits[i]);
+    }
+
+    for (int i{}; i < 32; i++) {
+        dividendo.push_back(0);
+        aux1.push_back(dividendo[i]);
+    }
+
+    for (int i{}; i < tremdebits.size(); i++){
+        aux1.push_back(dividendo[polinomio.size() + i]);
+        for (int j{}; j < polinomio.size(); j++) {
+            if (aux1[0]) {
+                aux2.push_back(aux1[j] ^ polinomio[j]);
+            } else {
+                aux2.push_back(aux1[j] ^ 0);
+            }
+        }
+        aux1.clear();
+        for (int j=1; j < aux2.size(); j++) {
+            aux1.push_back(aux2[j]);
+        }
+        aux2.clear();
+    }
+
+    for (int k{}; k < aux1.size(); k++) {
+        tremdebits.push_back(aux1[k]);
+    }
+    return tremdebits;
+}
+
+vector <int> decodificacaoCRC(vector <int> tremdebits) {
+    vector <int> aux1, aux2, dividendo;
+    vector <int> polinomio{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
+
+    for (int i{}; i < tremdebits.size(); i++) {
+        dividendo.push_back(tremdebits[i]);
+    }
+
+    for (int i{}; i < 32; i++) {
+        aux1.push_back(dividendo[i]);
+    }
+
+    for (int i{}; i < tremdebits.size() - 32; i++){
+        aux1.push_back(dividendo[polinomio.size() + i - 1]);
+
+        for (int j{}; j < polinomio.size(); j++) {
+            if (aux1[0]) {
+                aux2.push_back(aux1[j] ^ polinomio[j]);
+            } else {
+                aux2.push_back(aux1[j] ^ 0);
+            }
+        }
+        aux1.clear();
+        for (int j=1; j < aux2.size(); j++) {
+            aux1.push_back(aux2[j]);
+        }
+        aux2.clear();
+    }
+
+    for (int k{}; k < aux1.size(); k++){
+        if (aux1[k]) {
+             cout << "Erro encontrado!!!";
+        }
+    }
+
+    tremdebits.clear();
+
+    for (int k{}; k < dividendo.size() - 32; k++){
+        tremdebits.push_back(dividendo[k]);
+    }
+
+    return tremdebits;
+}
+***/
