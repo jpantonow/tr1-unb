@@ -29,6 +29,7 @@ class CamadaEnlaceTransmissora: public CamadaEnlace {
         vector <int> InsercaoDeBytes(vector <int> quadro);
         vector <int> ControleDeErroCRC(vector <int> quadro);
         vector <int> ControleDeErroBitParidadePar(vector <int> quadro);
+        vector <int> codificacaoHamming(vector <int>);
 };
 
 
@@ -39,5 +40,6 @@ class CamadaEnlaceReceptora: public CamadaEnlace {
          vector <int> InsercaoDeBytes(vector <int> quadro);
          vector <int> ControleDeErroCRC(vector <int> quadro);
          vector <int> ControleDeErroBitParidadePar(vector <int> quadro);
+         vector <int> decodificacaoHamming(vector <int>);
 };
 

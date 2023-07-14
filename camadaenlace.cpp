@@ -107,8 +107,8 @@ vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
 
 }
 
-/***
-vector <int> codificacaoHamming(vector <int> tremdebits) {
+
+vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> tremdebits) {
     int par0, par1, par2, par3;
     vector <int> tremcodificado;
 
@@ -122,7 +122,7 @@ vector <int> codificacaoHamming(vector <int> tremdebits) {
     return tremcodificado;
 }
 
-vector <int> decodificacaoHamming(vector <int> tremdebits) {
+vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits) {
     int pos_errada {};
     vector <int> tremcorrigido;
 
@@ -170,7 +170,7 @@ vector <int> decodificacaoBitParidade(vector <int> tremdebits) {
     return tremdebits;
 }
 
-vector <int> codificacaoCRC(vector <int> tremdebits) {
+vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> tremdebits) {
     vector <int> aux1, aux2, dividendo;
     vector <int> polinomio{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
 
@@ -205,7 +205,7 @@ vector <int> codificacaoCRC(vector <int> tremdebits) {
     return tremdebits;
 }
 
-vector <int> decodificacaoCRC(vector <int> tremdebits) {
+vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
     vector <int> aux1, aux2, dividendo;
     vector <int> polinomio{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
 
@@ -248,4 +248,4 @@ vector <int> decodificacaoCRC(vector <int> tremdebits) {
 
     return tremdebits;
 }
-***/
+
