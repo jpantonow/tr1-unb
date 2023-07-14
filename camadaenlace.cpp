@@ -74,9 +74,17 @@ while(!quadro.empty()){
 }
 return enquadrado;
 }
+vector <int> CamadaEnlace::dividirquadro(vector <int> quadro){
+    int partes = quadro.size()/8;
+    vector<int> divisao;
+    vector<vector <int>> resultado;
+    while(partes!=0){
+        divisao = inserir_bytes(quadro, divisao);
+        resultado.push_back(divisao);
+    }
+}
 vector <int> CamadaEnlace::checksum(vector <int> byte){
     vector <int> checksum;
-    
 }
 vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> quadro){
 // 802.3 POLINOMIO GERADOR
