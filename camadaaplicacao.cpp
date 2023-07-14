@@ -28,7 +28,8 @@ void CamadaAplicacao::Transmissora() {
     cout << "Sua escolha: ";
     cin >> codificacao;
     CamadaFisicaTransmissora camadaFisicaTransmissora;
-    camadaFisicaTransmissora.iniciar(codificacao, mensagem);
+    vector <int> binario = ConversorStringBits(mensagem);
+    camadaFisicaTransmissora.iniciar(codificacao, binario);
 }
 /**
  * @brief Método que transforma string em bits.

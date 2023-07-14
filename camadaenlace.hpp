@@ -19,7 +19,7 @@ class CamadaEnlace{
     vector <int> checksum(vector <int> byte);
     vector <int> complementode1(vector <int> numero);
     vector <int> somabinaria(vector <int>, vector<int>);
-    vector <int> dividirquadro(vector <int>);
+    vector <vector <int>> dividirquadro(vector <int>);
 };
 
 
