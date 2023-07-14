@@ -38,14 +38,19 @@ vector <int> CamadaEnlace::int_byte(int size){
 
 vector <int> CamadaEnlaceTransmissora::ContagemDeCaracteres(vector <int> quadro){
 int cont = 0;
-vector <int> enquadrado;
+//vector <int> enquadrado;
 //quadro = dividirquadro(quadro);
-int size = quadro.size();
-vector <int> byte = int_byte(size);
-for(int i = 0; i < byte.size(); i++){
-    enquadrado.insert(enquadrado.begin() + i, byte[i]);
-}
-return enquadrado;
+// int size = quadro.size();
+// vector <int> byte = int_byte(size);
+// for(int i = 0; i < byte.size(); i++){
+//     enquadrado.insert(enquadrado.begin() + i, byte[i]);
+// }
+// return enquadrado;
+vector <vector <int>> enquadrado;
+enquadrado.push_back(quadro);
+vector <int> cabecalho = int_byte(enquadrado.size());
+enquadrado.insert(enquadrado.begin(), cabecalho);
+
 }
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
     for(int i = 0; i < byte.size(); i++){
