@@ -38,18 +38,18 @@ vector <int> CamadaEnlace::int_byte(int size){
 
 vector <int> CamadaEnlaceTransmissora::ContagemDeCaracteres(vector <int> quadro){
 int cont = 0;
-//vector <int> enquadrado;
-//quadro = dividirquadro(quadro);
-// int size = quadro.size();
-// vector <int> byte = int_byte(size);
-// for(int i = 0; i < byte.size(); i++){
-//     enquadrado.insert(enquadrado.begin() + i, byte[i]);
-// }
-// return enquadrado;
-vector <vector <int>> enquadrado;
-enquadrado.push_back(quadro);
-vector <int> cabecalho = int_byte(enquadrado.size());
-enquadrado.insert(enquadrado.begin(), cabecalho);
+vector <int> enquadrado;
+vector <vector <int>> divisao;
+divisao = dividirquadro(quadro);
+ int size = divisao.size();
+ vector <int> byte = int_byte(size);
+ for(int i = 0; i < byte.size(); i++){
+     enquadrado.insert(enquadrado.begin() + i, byte[i]);
+     for(int j = 0; j < divisao[i].size(); j++){
+        enquadrado.push_back(divisao[i][j]);
+     }
+ }
+return enquadrado;
 
 }
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
@@ -128,17 +128,34 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 
 }
 
-vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
-    int bit_paridade{};
+// vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
+//     int bit_paridade{};
 
-    for (int i{}; i < tremdebits.size(); i++) {
-        bit_paridade = bit_paridade ^ tremdebits[i];
+//     for (int i{}; i < tremdebits.size(); i++) {
+//         bit_paridade = bit_paridade ^ tremdebits[i];
+//     }
+
+//     tremdebits.push_back(bit_paridade);
+
+//     return tremdebits;
+// }
+
+vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits){
+    vector <vector <int>> divisao;
+    divisao = dividirquadro(tremdebits);
+    int bit_paridade = 0;
+    for(int i = 0; i < divisao.size(); i++){
+        for(int j = 0; j < divisao[i].size(); j++){
+            bit_paridade = bit_paridade ^ divisao[i + j][i];
+        }
+        tremdebits.push_back(bit_paridade);
+        bit_paridade = 0;
     }
-
-    tremdebits.push_back(bit_paridade);
-
     return tremdebits;
-}
+}// [[0,1,2], [2,3,4]]
+// 0 xor 2
+// 1 xor 3
+// 2 xor 4
 
 vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
     int aux{};
