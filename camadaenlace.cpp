@@ -141,6 +141,11 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 // }
 
 vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits){
+    tremdebits = calculoparidade(tremdebits);
+    return tremdebits;
+}
+
+vector <int> CamadaEnlace::calculoparidade(vector <int> tremdebits){
     vector <vector <int>> divisao;
     divisao = dividirquadro(tremdebits);
     int bit_paridade = 0;
@@ -152,23 +157,27 @@ vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int>
         bit_paridade = 0;
     }
     return tremdebits;
-}// [[0,1,2], [2,3,4]]
-// 0 xor 2
-// 1 xor 3
-// 2 xor 4
-
+}
 vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
     int aux{};
-
-    for (int i{}; i < tremdebits.size(); i++) {
-        aux = aux ^ tremdebits[i];
+    vector <int> paridade_recebida;
+    vector <int> paridade_calculada;
+    for(int i = tremdebits.size(); i > tremdebits.size()-9; i--){
+        paridade_recebida.insert(paridade_recebida.begin(),tremdebits[i]);
+        tremdebits.pop_back();
+    }
+    paridade_calculada = calculoparidade(tremdebits);
+    for(int i = 0; i < paridade_calculada.size(); i++){
+        if(paridade_calculada[i]!= paridade_recebida[i]){
+            aux = 1;
+        }
     }
 
     if (aux) {
         cout << "Erro detectado no quadro!!!" << "\n";
     }
 
-    tremdebits.pop_back();
+    //tremdebits.pop_back();
 
     return tremdebits;
 }
