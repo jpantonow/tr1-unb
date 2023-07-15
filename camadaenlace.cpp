@@ -1,32 +1,5 @@
 #include "camadaenlace.hpp"
 
-//vector <int> CamadaEnlace::complementode1(vector <int> numero){
-//     vector<int> complemento;
-//     for(int i = 0; i < numero.size(); i++){
-//         if(numero[i] == 1){
-//             complemento.push_back(0);
-//         }
-//         else{
-//             complemento.push_back(1);
-//         }
-//     }
-//     return complemento;
-// }
-// vector <int> CamadaEnlace::somabinaria(vector <int> numero1, vector<int> numero2){
-//     int carry = 0;
-//     int soma = 0;
-//     vector <int> resultado;
-//     for(int i = numero1.size(); i >= 0; i--){
-//         int soma = numero1[i] + numero2[i] + carry;
-//         resultado[i] = soma % 2;
-//         carry = soma/2;
-//     }
-//     if(carry!=0){
-//         resultado.insert(resultado.begin(), carry);
-//     }
-//     return resultado;
-// }
-
 vector <int> CamadaEnlace::int_byte(int size){
     vector <int> byte;
     for(int i = 0; i <= 7; i++){
