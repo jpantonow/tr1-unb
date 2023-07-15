@@ -3,7 +3,7 @@
 vector <int> CamadaEnlace::int_byte(int size){
     vector <int> byte;
     for(int i = 0; i <= 7; i++){
-        byte.push_back(size % 2);
+        byte.insert(byte.begin(),(size % 2));
         size = size/2;
     }
     return byte;
