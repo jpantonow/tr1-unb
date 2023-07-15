@@ -103,7 +103,7 @@ vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> tremdebit
     par2 = tremdebits[1] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[7];
     par3 = tremdebits[4] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[7];
 
-    tremcodificado = {par0, par1, tremdebits[0], par2, tremdebits[1], tremdebits[2], tremdebits[3], par3, tremdebits[4], tremdebits[5], tremdebits[6], tremdebits[7]};
+    tremcodificado = {par0, par1, tremdebits[0], par2, tremdebits[1], tremdebits[2], tremdebits[3], par3, tremdebits[4], tremdebits[5], tremdebits[6], tremdebits[7], 0, 0, 0, 0};
 
     return tremcodificado;
 }
