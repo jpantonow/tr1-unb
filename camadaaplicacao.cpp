@@ -13,14 +13,16 @@ void CamadaAplicacao::Transmissora() {
     getline(cin, mensagem);
     cout << "Escolha um tipo de enquadramento a ser utilizado:" << endl;
     cout << "0 - Contagem de Caracteres" << endl;
-    cout << "1 - Inserção de Bytes" << endl;
+    cout << "1 - Insercao de Bytes" << endl;
     cout << "Sua escolha: " << endl;
     cin >> enquadramento;
     cout << "Escolha um tipo de erro: " << endl;
     cout << "0: Bit de paridade par" << endl;
     cout << "1: CRC" << endl;
     cout << "2: Hamming" << endl;
-    cin >> erro;   
+    cin >> erro;
+    cout << "Escolha uma porcentagem de erro por bit:" << endl;
+    cin >> porcentagem;
     cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
     cout << "0 - Binaria" << endl;
     cout << "1 - Manchester" << endl;
@@ -98,6 +100,34 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) 
  */
 void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codificacao) {
     cout << "A mensagem codificada pode ser representada por: " << endl;
+    for (int i=0; i < fluxoBrutoDeBits.size(); i++) {
+        if (codificacao == 2) {
+            if ((i%8 == 0) & (fluxoBrutoDeBits[i] == 0)) {
+            cout <<"\n0" << fluxoBrutoDeBits[i];
+        } else if ((i%8 == 0) & (fluxoBrutoDeBits[i] != 0)) {
+            cout <<"\n" << fluxoBrutoDeBits[i];
+        } else {
+            if (fluxoBrutoDeBits[i] == 11 || fluxoBrutoDeBits[i] == 10) {
+                cout << " " << fluxoBrutoDeBits[i];
+            } else {
+                cout << " 0" << fluxoBrutoDeBits[i];
+            }
+        }
+        } else {
+        if (i%8 == 0) {
+            cout <<"\n" << fluxoBrutoDeBits[i];
+        } else {
+        if (fluxoBrutoDeBits[i] == 11 || fluxoBrutoDeBits[i] == 10) {
+            cout << " " << fluxoBrutoDeBits[i];
+        } else {
+            cout << "  " << fluxoBrutoDeBits[i];
+        }
+        }
+    }
+    }
+}
+void CamadaAplicacao::MensagemEnquadrada(vector <int> fluxoBrutoDeBits, int codificacao) {
+    cout << "A mensagem enquadrada pode ser representada por: " << endl;
     for (int i=0; i < fluxoBrutoDeBits.size(); i++) {
         if (codificacao == 2) {
             if ((i%8 == 0) & (fluxoBrutoDeBits[i] == 0)) {

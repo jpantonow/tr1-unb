@@ -90,6 +90,7 @@ string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream) {
  */
 void CamadaFisicaTransmissora::iniciar(int codificacao, vector <int> quadro) {
     MeioDeComunicacao meioDeComunicacao;
+    CamadaAplicacao camadaAplicacao;
     switch (codificacao) {
         case BINARIA:
             //repassa o resultado para a camada física transmissora binária

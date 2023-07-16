@@ -17,6 +17,7 @@ class Camada {
     int codificacao;
     int enquadramento;
     int erro;
+    int porcentagem;
 };
 
 /**
