@@ -107,7 +107,30 @@ vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vect
     }
     return enquadrado;
 }
-
+vector <int> CamadaEnlaceReceptora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
+    vector <int> corrigido;
+    vector <int> desenquadrado;
+    switch(erro){
+        case PARIDADE:
+            corrigido = ControleDeErroBitParidadePar(tremdebits);
+            break;
+        case CRC:
+            corrigido = ControleDeErroCRC(tremdebits);
+            break;
+        case HAMMING:
+            corrigido = decodificacaoHamming(tremdebits);
+            break;
+    }
+    switch(enquadramento){
+        case CONTAGEM:
+            desenquadrado = ContagemDeCaracteres(corrigido);
+            break;
+        case INSERCAO:
+            desenquadrado = InsercaoDeBytes(corrigido);
+            break;
+    }
+    return desenquadrado;
+}
 vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> tremdebits) {
     int par0, par1, par2, par3;
     vector <int> tremcodificado;
