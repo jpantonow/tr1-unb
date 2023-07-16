@@ -66,15 +66,11 @@ vector <int> CamadaAplicacao::ConversorStringBits(string mensagem) {
  * @param codificacao 
  */
 void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
-    CamadaEnlaceTransmissora camadaEnlace;
-    cout << "deu erro no metodo" << endl;
-    getchar();
-    fluxoBrutoDeBits = camadaEnlace.ContagemDeCaracteres(fluxoBrutoDeBits);
-    cout << "fez o enlace" << endl;
-    getchar();
     MensagemCodificada(fluxoBrutoDeBits, codificacao);
-    cout << "crashou" << endl;
-    getchar();
+    CamadaEnlaceTransmissora camadaEnlace;
+    vector <int> enlace;
+    enlace = camadaEnlace.ContagemDeCaracteres(fluxoBrutoDeBits);
+    MensagemCodificada(enlace, codificacao);
     CamadaFisicaReceptora receptora;
     string mensagem;
 
@@ -107,7 +103,7 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) 
  * @param codificacao 
  */
 void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codificacao) {
-    cout << "A mensagem codificada pode ser representada por: " << endl;
+    cout << "\nA mensagem codificada pode ser representada por: " << endl;
     for (int i=0; i < fluxoBrutoDeBits.size(); i++) {
         if (codificacao == 2) {
             if ((i%8 == 0) & (fluxoBrutoDeBits[i] == 0)) {
