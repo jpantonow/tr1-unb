@@ -31,6 +31,9 @@ void CamadaAplicacao::Transmissora() {
     cin >> codificacao;
     CamadaFisicaTransmissora camadaFisicaTransmissora;
     vector <int> binario = ConversorStringBits(mensagem);
+    CamadaEnlaceTransmissora camadaEnlaceTransmissora;
+    //vector <int> enquadrado = camadaEnlaceTransmissora.iniciar(erro,enquadramento,binario);
+    //mudar o binario da camada fisica transmissora pra receber o enquadrado
     camadaFisicaTransmissora.iniciar(codificacao, binario, porcentagem);
 }
 /**

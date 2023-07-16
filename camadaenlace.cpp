@@ -186,9 +186,10 @@ vector <int> CamadaEnlace::calculoparidade(vector <int> tremdebits){
     vector <vector <int>> divisao;
     divisao = dividirquadro(tremdebits);
     int bit_paridade = 0;
-    for(int i = 0; i < divisao.size(); i++){
-        for(int j = 0; j < divisao[i].size(); j++){
-            bit_paridade = bit_paridade ^ divisao[i + j][i];
+     int sizeofbyte = divisao[0].size();
+    for(int i = 0; i < sizeofbyte; i++){
+        for(int j = 0; j < divisao.size(); j++){
+            bit_paridade = bit_paridade ^ divisao[j][i];
         }
         tremdebits.push_back(bit_paridade);
         bit_paridade = 0;

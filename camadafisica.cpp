@@ -265,7 +265,7 @@ vector <int> MeioDeComunicacao::Comunicacao(vector <int> fluxoBrutoDeBits,int po
     bool hasError = porcentagem > rand() % 100;
     if(hasError){
         for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++) {
-            fluxoBrutoDeBitsPontoB.push_back(!fluxoBrutoDeBitsPontoA[i]);
+            fluxoBrutoDeBitsPontoB.push_back(!(fluxoBrutoDeBitsPontoA[i]));
     }
     }
     else{
