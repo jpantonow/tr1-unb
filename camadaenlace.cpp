@@ -25,6 +25,8 @@ return enquadrado;
 }
 
 vector <int> CamadaEnlaceReceptora::ContagemDeCaracteres(vector <int> quadro){
+cout << "entra na metodo" << endl;
+    getchar();
 vector <int> enquadrado;
 vector <vector <int>> divisao;
 divisao = dividirquadro(quadro);
@@ -32,7 +34,6 @@ divisao = dividirquadro(quadro);
  vector <int> byte = int_byte(size-1);
  if(byte!=divisao[0]){
     cout <<"\n" << "Erro na contagem de caracteres" << endl;
-    return;
  }
 
  for(int i = 0; i < byte.size(); i++){

@@ -1,4 +1,3 @@
-
 #include <bitset>
 #include "camadafisica.cpp"
 #include <iostream>

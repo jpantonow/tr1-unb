@@ -58,7 +58,7 @@ class CamadaAplicacao: public Camada {
      * @brief Método que imprime a mensagem recebida ao usuário.
      * 
      */
-    void MensagemEnquadrada(vector <int> fluxoBrutoDeBits, int codificacao);
+    //void MensagemEnquadrada(vector <int> fluxoBrutoDeBits, int codificacao);
     void MensagemRecebida(string);
     /**
      * @brief Método que recebe a string mensagem e a transforma em bits.

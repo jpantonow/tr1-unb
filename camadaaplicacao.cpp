@@ -1,4 +1,5 @@
 #include "camadaaplicacao.hpp"
+#include "camadaenlace.cpp"
 
 /**
  * @brief Método que começa a simulação.
@@ -66,7 +67,15 @@ vector <int> CamadaAplicacao::ConversorStringBits(string mensagem) {
  * @param codificacao 
  */
 void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
+    CamadaEnlaceTransmissora camadaEnlace;
+    cout << "deu erro no metodo" << endl;
+    getchar();
+    fluxoBrutoDeBits = camadaEnlace.ContagemDeCaracteres(fluxoBrutoDeBits);
+    cout << "fez o enlace" << endl;
+    getchar();
     MensagemCodificada(fluxoBrutoDeBits, codificacao);
+    cout << "crashou" << endl;
+    getchar();
     CamadaFisicaReceptora receptora;
     string mensagem;
 
@@ -126,34 +135,7 @@ void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codi
     }
     }
 }
-void CamadaAplicacao::MensagemEnquadrada(vector <int> fluxoBrutoDeBits, int codificacao) {
-    cout << "A mensagem enquadrada pode ser representada por: " << endl;
-    for (int i=0; i < fluxoBrutoDeBits.size(); i++) {
-        if (codificacao == 2) {
-            if ((i%8 == 0) & (fluxoBrutoDeBits[i] == 0)) {
-            cout <<"\n0" << fluxoBrutoDeBits[i];
-        } else if ((i%8 == 0) & (fluxoBrutoDeBits[i] != 0)) {
-            cout <<"\n" << fluxoBrutoDeBits[i];
-        } else {
-            if (fluxoBrutoDeBits[i] == 11 || fluxoBrutoDeBits[i] == 10) {
-                cout << " " << fluxoBrutoDeBits[i];
-            } else {
-                cout << " 0" << fluxoBrutoDeBits[i];
-            }
-        }
-        } else {
-        if (i%8 == 0) {
-            cout <<"\n" << fluxoBrutoDeBits[i];
-        } else {
-        if (fluxoBrutoDeBits[i] == 11 || fluxoBrutoDeBits[i] == 10) {
-            cout << " " << fluxoBrutoDeBits[i];
-        } else {
-            cout << "  " << fluxoBrutoDeBits[i];
-        }
-        }
-    }
-    }
-}
+
 /**
  * @brief Método para imprimir uma mensagem.
  * 

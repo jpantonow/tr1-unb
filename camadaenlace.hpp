@@ -3,7 +3,6 @@
 #include <cmath>
 #include <stdlib.h>
 #include <vector>
-#include "camadafisica.hpp"
 using namespace std;
 
 class CamadaEnlace{
