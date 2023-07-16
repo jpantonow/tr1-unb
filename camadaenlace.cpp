@@ -15,7 +15,7 @@ divisao = dividirquadro(quadro);
  int size = divisao.size();
  vector <int> byte = int_byte(size);
  enquadrado = inserir_bytes(byte,enquadrado);
- for(int i = 0; i < divisao.size()-1; i++){
+ for(int i = 0; i < divisao.size()-i; i++){
     for(int j = 0; j < divisao[i].size(); j++){
         enquadrado.push_back(divisao[i][j]);
      }
