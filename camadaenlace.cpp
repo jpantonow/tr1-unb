@@ -40,15 +40,15 @@ vector <int> enquadrado;
 
 while(!quadro.empty()){
     if(cont==0){
-        inserir_bytes(esc, enquadrado);
-        inserir_bytes(flag, enquadrado);
+        inserir_bytes(enquadrado, esc);
+        inserir_bytes(enquadrado, flag);
     }
     if(cont==7){
         cont = 0;
         enquadrado.push_back(quadro[0]);
         quadro.pop_back();
-        inserir_bytes(esc, enquadrado);
-        inserir_bytes(flag, enquadrado);
+        inserir_bytes(enquadrado, esc);
+        inserir_bytes(enquadrado, flag);
         continue;
     }
     cont +=1;
