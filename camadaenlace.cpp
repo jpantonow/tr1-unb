@@ -63,14 +63,14 @@ while(!quadro.empty()){
     if(cont==7){
         cont = 0;
         enquadrado.push_back(quadro[0]);
-        quadro.pop_back();
+        quadro.erase(quadro.begin());
         inserir_bytes(enquadrado, esc);
         inserir_bytes(enquadrado, flag);
         continue;
     }
     cont +=1;
     enquadrado.push_back(quadro[0]);
-    quadro.pop_back();
+    quadro.erase(quadro.begin());
 }
 return enquadrado;
 }
