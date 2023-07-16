@@ -44,6 +44,7 @@ return enquadrado;
 
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
     for(int i = 0; i < byte.size(); i++){
+        cout << "byte inserido no quadro: " << byte[i] << endl;
         quadro.push_back(byte[i]);
     }
     return quadro;
@@ -77,7 +78,10 @@ vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     vector<int> divisao;
     vector<vector <int>> resultado;
     while(partes!=0){
-        divisao = inserir_bytes(divisao, quadro);
+        divisao = inserir_bytes(quadro, divisao);
+        for(int j = 0; j < 8; j++){
+            quadro.erase(quadro.begin());
+        }
         resultado.push_back(divisao);
         partes = partes - 1;
     }
@@ -178,15 +182,19 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 // }
 
 vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits){
-    tremdebits = calculoparidade(tremdebits);
-    return tremdebits;
+    vector <int> controledeerro;
+    controledeerro = calculoparidade(tremdebits);
+    return controledeerro;
 }
 
 vector <int> CamadaEnlace::calculoparidade(vector <int> tremdebits){
     vector <vector <int>> divisao;
     divisao = dividirquadro(tremdebits);
     int bit_paridade = 0;
-     int sizeofbyte = divisao[0].size();
+    int sizeofbyte = divisao[0].size();
+    cout <<"fim da deivisao" << endl; getchar();
+    cout << divisao.size() << endl; getchar();
+    cout << divisao[0].size() << endl; getchar();
     for(int i = 0; i < sizeofbyte; i++){
         for(int j = 0; j < divisao.size(); j++){
             bit_paridade = bit_paridade ^ divisao[j][i];

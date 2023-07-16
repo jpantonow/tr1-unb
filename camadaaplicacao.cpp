@@ -32,9 +32,9 @@ void CamadaAplicacao::Transmissora() {
     CamadaFisicaTransmissora camadaFisicaTransmissora;
     vector <int> binario = ConversorStringBits(mensagem);
     CamadaEnlaceTransmissora camadaEnlaceTransmissora;
-    //vector <int> enquadrado = camadaEnlaceTransmissora.iniciar(erro,enquadramento,binario);
+    vector <int> enquadrado = camadaEnlaceTransmissora.iniciar(erro,enquadramento,binario);
     //mudar o binario da camada fisica transmissora pra receber o enquadrado
-    camadaFisicaTransmissora.iniciar(codificacao, binario, porcentagem);
+    camadaFisicaTransmissora.iniciar(codificacao, enquadrado, porcentagem);
 }
 /**
  * @brief Método que transforma string em bits.
@@ -70,10 +70,10 @@ vector <int> CamadaAplicacao::ConversorStringBits(string mensagem) {
  */
 void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
     //MensagemCodificada(fluxoBrutoDeBits, codificacao);
-    CamadaEnlaceTransmissora camadaEnlace;
-    vector <int> enlace;
-    enlace = camadaEnlace.ContagemDeCaracteres(fluxoBrutoDeBits);
-    MensagemCodificada(enlace, codificacao);
+    // CamadaEnlaceTransmissora camadaEnlace;
+    // vector <int> enlace;
+    // enlace = camadaEnlace.ContagemDeCaracteres(fluxoBrutoDeBits);
+    MensagemCodificada(fluxoBrutoDeBits, codificacao);
     CamadaFisicaReceptora receptora;
     string mensagem;
 
