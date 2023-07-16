@@ -24,8 +24,6 @@ return enquadrado;
 }
 
 vector <int> CamadaEnlaceReceptora::ContagemDeCaracteres(vector <int> quadro){
-cout << "entra na metodo" << endl;
-    getchar();
 vector <int> enquadrado;
 vector <vector <int>> divisao;
 divisao = dividirquadro(quadro);

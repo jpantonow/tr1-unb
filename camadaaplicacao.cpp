@@ -66,7 +66,7 @@ vector <int> CamadaAplicacao::ConversorStringBits(string mensagem) {
  * @param codificacao 
  */
 void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
-    MensagemCodificada(fluxoBrutoDeBits, codificacao);
+    //MensagemCodificada(fluxoBrutoDeBits, codificacao);
     CamadaEnlaceTransmissora camadaEnlace;
     vector <int> enlace;
     enlace = camadaEnlace.ContagemDeCaracteres(fluxoBrutoDeBits);

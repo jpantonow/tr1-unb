@@ -152,6 +152,7 @@ class CamadaFisicaReceptora: public Camada {
  */
 class MeioDeComunicacao{
     private:
+
     public:
     /**
      * @brief Transmite os bits de um ponto a outro, retornando-os.
@@ -159,6 +160,6 @@ class MeioDeComunicacao{
      * @param fluxoBrutoDeBits 
      * @return vector <int> 
      */
-    vector <int> Comunicacao(vector <int> fluxoBrutoDeBits);
+    vector <int> Comunicacao(vector <int> fluxoBrutoDeBits,int porcentagem);
 };
 

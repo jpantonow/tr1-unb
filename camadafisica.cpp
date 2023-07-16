@@ -259,11 +259,19 @@ string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits) {
  * @param fluxoBrutoDeBits 
  * @return vector <int> 
  */
-vector <int> MeioDeComunicacao::Comunicacao(vector <int> fluxoBrutoDeBits) {
+vector <int> MeioDeComunicacao::Comunicacao(vector <int> fluxoBrutoDeBits,int porcentagem) {
     vector <int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++) {
+    bool hasError = porcentagem > rand() % 100;
+    if(hasError){
+        for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++) {
+            fluxoBrutoDeBitsPontoB.push_back(!fluxoBrutoDeBitsPontoA[i]);
+    }
+    }
+    else{
+        for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++) {
         fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA[i]);
+    }
     }
     return fluxoBrutoDeBitsPontoB;
 }
