@@ -34,7 +34,7 @@ divisao = dividirquadro(quadro);
     cout <<"\n" << "Erro na contagem de caracteres" << endl;
     return;
  }
- 
+
  for(int i = 0; i < byte.size(); i++){
      enquadrado.insert(enquadrado.begin() + i, byte[i]);
      for(int j = 0; j < divisao[i].size(); j++){
@@ -167,7 +167,7 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tr
     }
 
     if (aux) {
-        cout << "Erro detectado no quadro!!!" << "\n";
+        cout << "Erro detectado no quadro!!!" << endl;
     }
 
     //tremdebits.pop_back();
@@ -239,7 +239,7 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
 
     for (int k{}; k < aux1.size(); k++){
         if (aux1[k]) {
-             cout << "Erro encontrado!!!";
+             cout << "Erro encontrado!!!" << endl;
         }
     }
 
