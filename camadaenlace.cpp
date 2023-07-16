@@ -23,6 +23,8 @@ divisao = dividirquadro(quadro);
      }
  }
 return enquadrado;
+}
+vector <int> CamadaEnlaceReceptora::ContagemDeCaracteres(vector <int> quadro){
 
 }
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
@@ -60,8 +62,9 @@ vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     vector<int> divisao;
     vector<vector <int>> resultado;
     while(partes!=0){
-        divisao = inserir_bytes(quadro, divisao);
+        divisao = inserir_bytes(divisao, quadro);
         resultado.push_back(divisao);
+        partes = partes - 1;
     }
     return resultado;
 }
