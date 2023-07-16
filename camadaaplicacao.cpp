@@ -1,6 +1,5 @@
 #include "camadaaplicacao.hpp"
 #include "camadaenlace.cpp"
-
 /**
  * @brief Método que começa a simulação.
  * 

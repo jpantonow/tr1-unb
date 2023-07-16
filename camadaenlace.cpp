@@ -1,5 +1,4 @@
 #include "camadaenlace.hpp"
-
 vector <int> CamadaEnlace::int_byte(int size){
     vector <int> byte;
     for(int i = 0; i <= 7; i++){
