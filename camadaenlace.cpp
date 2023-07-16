@@ -126,7 +126,7 @@ vector <int> CamadaEnlaceReceptora::iniciar(int erro, int enquadramento, vector<
             desenquadrado = ContagemDeCaracteres(corrigido);
             break;
         case INSERCAO:
-            desenquadrado = InsercaoDeBytes(corrigido);
+            //desenquadrado = InsercaoDeBytes(corrigido);
             break;
     }
     return desenquadrado;
