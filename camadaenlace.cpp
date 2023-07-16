@@ -83,7 +83,30 @@ vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     }
     return resultado;
 }
-
+vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
+    vector <int> corrigido;
+    vector <int> enquadrado;
+    switch(erro){
+        case PARIDADE:
+            corrigido = ControleDeErroBitParidadePar(tremdebits);
+            break;
+        case CRC:
+            corrigido = ControleDeErroCRC(tremdebits);
+            break;
+        case HAMMING:
+            corrigido = codificacaoHamming(tremdebits);
+            break;
+    }
+    switch(enquadramento){
+        case CONTAGEM:
+            enquadrado = ContagemDeCaracteres(corrigido);
+            break;
+        case INSERCAO:
+            enquadrado = InsercaoDeBytes(corrigido);
+            break;
+    }
+    return enquadrado;
+}
 
 vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> tremdebits) {
     int par0, par1, par2, par3;

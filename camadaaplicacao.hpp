@@ -25,9 +25,6 @@ class CamadaAplicacao: public Camada {
      */
     const static int BIPOLAR = 2;
 
-    const static int CONTAGEM = 0;
-    const static int INSERCAO = 1;
-
     public:
     /**
      * @brief String que representa a mensagem recebida.

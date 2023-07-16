@@ -6,7 +6,13 @@
 using namespace std;
 
 class CamadaEnlace{
+    private:
     public:
+    const static int CONTAGEM = 0;
+    const static int INSERCAO = 1;
+    const static int PARIDADE = 0;
+    const static int CRC = 1;
+    const static int HAMMING = 2;
     vector <int> quadroEnquadrado;
     vector <int> crc{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
                               0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1};
@@ -29,6 +35,7 @@ class CamadaEnlaceTransmissora: public CamadaEnlace {
         vector <int> ControleDeErroCRC(vector <int> quadro);
         vector <int> ControleDeErroBitParidadePar(vector <int> quadro);
         vector <int> codificacaoHamming(vector <int>);
+        vector <int> iniciar(int enquadramento, int erro, vector <int>);
 };
 
 
@@ -40,5 +47,6 @@ class CamadaEnlaceReceptora: public CamadaEnlace {
          vector <int> ControleDeErroCRC(vector <int> quadro);
          vector <int> ControleDeErroBitParidadePar(vector <int> quadro);
          vector <int> decodificacaoHamming(vector <int>);
+         vector <int> iniciar(int enquadramento, int erro, vector <int>);
 };
 
