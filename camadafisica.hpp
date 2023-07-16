@@ -63,7 +63,7 @@ class CamadaFisicaTransmissora: public Camada {
      * @param codificacao 
      * @param mensagem 
      */
-    void iniciar(int codificacao, vector <int>);
+    void iniciar(int codificacao, vector <int>, int porcentagem);
     /**
      * @brief Método que codifica e transmite a mensagem na codificação binaria.
      * 

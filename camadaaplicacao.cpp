@@ -31,7 +31,7 @@ void CamadaAplicacao::Transmissora() {
     cin >> codificacao;
     CamadaFisicaTransmissora camadaFisicaTransmissora;
     vector <int> binario = ConversorStringBits(mensagem);
-    camadaFisicaTransmissora.iniciar(codificacao, binario);
+    camadaFisicaTransmissora.iniciar(codificacao, binario, porcentagem);
 }
 /**
  * @brief Método que transforma string em bits.

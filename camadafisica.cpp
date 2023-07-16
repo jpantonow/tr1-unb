@@ -88,7 +88,7 @@ string CamadaFisicaReceptora::ConversorBitString(vector <int> bitstream) {
  * @param codificacao 
  * @param mensagem 
  */
-void CamadaFisicaTransmissora::iniciar(int codificacao, vector <int> quadro) {
+void CamadaFisicaTransmissora::iniciar(int codificacao, vector <int> quadro, int porcentagem) {
     MeioDeComunicacao meioDeComunicacao;
     CamadaAplicacao camadaAplicacao;
     switch (codificacao) {
@@ -106,7 +106,7 @@ void CamadaFisicaTransmissora::iniciar(int codificacao, vector <int> quadro) {
             break;
 }
 //Passa o fluxo bruto de bits para o meio de comunicação
-vector <int> fluxoComunicado = meioDeComunicacao.Comunicacao(fluxoBrutoDeBits);
+vector <int> fluxoComunicado = meioDeComunicacao.Comunicacao(fluxoBrutoDeBits, porcentagem);
 //Passa o fluxo ja comunicado junto da codificação escolhida
     camadaAplicacao.Receptora(fluxoComunicado, codificacao);
 }
