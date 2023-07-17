@@ -21,7 +21,7 @@ void CamadaAplicacao::Transmissora() {
     cout << "1: CRC" << endl;
     cout << "2: Hamming" << endl;
     cin >> erro;
-    cout << "Escolha uma porcentagem de erro por bit:" << endl;
+    cout << "Escolha uma porcentagem de erro(50%, 75%, 100%) :" << endl;
     cin >> porcentagem;
     cout << "Escolha um tipo de codificacao a ser utilizada: " << endl;
     cout << "0 - Binaria" << endl;

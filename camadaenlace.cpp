@@ -29,20 +29,9 @@ vector <vector <int>> divisao;
 divisao = dividirquadro(quadro);
  int size = divisao.size();
  vector <int> byte = int_byte(size-1);
- cout << "\nbyte is: ";
- for(int i = 0; i < byte.size(); i++){
-    cout << byte[i];
- }
- cout <<"\ndivisao[0] is: ";
- for(int i = 0; i < divisao[0].size(); i++){
-    cout << divisao[0][i];
- }
- if(byte!=divisao[0]){
-    cout <<"\n" << "Erro na contagem de caracteres" << endl;
- }
- cout << "\nquadro is: " << endl;
+
+
 for(int i = 8; i < quadro.size(); i++){
-    cout << quadro[i];
     enquadrado.push_back(quadro[i]);
 }
 //  for(int i = 0; i < byte.size(); i++){
@@ -260,9 +249,7 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tr
         tremdebits.pop_back();
     }
     vector <int> carga_util;
-    cout << "carga util:" << endl;
     for(int i = 0; i < tam-7; i++){
-        cout << tremdebits[i];
         carga_util.push_back(tremdebits[i]);
     }
 cout <<"\n";
