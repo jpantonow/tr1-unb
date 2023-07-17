@@ -340,3 +340,77 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
     return tremdebits;
 }
 
+/***
+vector <int> enquadramentoInsercaoBytes (vector <int> quadro) {
+    
+    vector <int> flag{0,0,0,0,1,1,1,1};
+    vector <int> esc{0,0,0,0,0,1,1,0};
+    
+    vector <int> aux1;
+    size_t tamanhoByte = 8;
+    
+    for (int i{}; i < flag.size(); i++) {
+        aux1.push_back(flag[i]);
+    }
+    
+    while (quadro.size()) {
+        if ((!quadro[0] && !quadro[1] && !quadro[2] && !quadro[3] && quadro[4] && quadro[5] && quadro[6] && quadro[7]) || (!quadro[0] && !quadro[1] && !quadro[2] && !quadro[3] && !quadro[4] && quadro[5] && quadro[6] && !quadro[7])) {
+            for (int i{}; i < esc.size(); i++) {
+                aux1.push_back(esc[i]);
+            }
+        }
+        for (int i{}; i < 8; i++) {
+            aux1.push_back(quadro[i]);
+        }
+        
+        if (quadro.size() >= tamanhoByte) {
+            quadro.erase(quadro.begin(), quadro.begin() + tamanhoByte);
+        }
+        
+    }
+
+    return aux1;
+}
+
+vector <int> desenquadrarInsercaoBytes (vector <int> quadro) {
+    
+    vector <int> flag{0,0,0,0,1,1,1,1};
+    vector <int> esc{0,0,0,0,0,1,1,0};
+    
+    vector <int> aux1;
+    
+    int isEsc{};
+    int isMensagem{};
+    size_t tamanhoByte = 8;
+    
+    while (quadro.size()) {
+        if (isMensagem) {
+            if (isEsc) {
+                for (int i{}; i < 8; i++) {
+                    aux1.push_back(quadro[i]);
+                }
+                isEsc = 0;
+            } else {
+                if (!quadro[0] && !quadro[1] && !quadro[2] && !quadro[3] && quadro[4] && quadro[5] && quadro[6] && quadro[7]) {
+                    isMensagem = 0;
+                } else if (!quadro[0] && !quadro[1] && !quadro[2] && !quadro[3] && !quadro[4] && quadro[5] && quadro[6] && !quadro[7]) {
+                    isEsc = 1;
+                } else {
+                    for (int i{}; i < 8; i++) {
+                        aux1.push_back(quadro[i]);
+                    }
+                }
+            }
+        } else {
+            if (!quadro[0] && !quadro[1] && !quadro[2] && !quadro[3] && quadro[4] && quadro[5] && quadro[6] && quadro[7]) {
+                    isMensagem = 1;
+            }
+        }
+        if (quadro.size() >= tamanhoByte) {
+            quadro.erase(quadro.begin(), quadro.begin() + tamanhoByte);
+        }
+    }
+    
+    return aux1;
+}
+***/
