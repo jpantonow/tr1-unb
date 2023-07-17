@@ -24,11 +24,25 @@ return enquadrado;
 }
 
 vector <int> CamadaEnlaceReceptora::ContagemDeCaracteres(vector <int> quadro){
+cout << "\n entrou na contagem de caracteres" << endl;
+getchar();
 vector <int> enquadrado;
+ cout << "quadro is " << quadro.size() << endl;
+ getchar();
 vector <vector <int>> divisao;
 divisao = dividirquadro(quadro);
  int size = divisao.size();
+ cout << "size is " << size << endl;
+ getchar();
  vector <int> byte = int_byte(size-1);
+ cout << "\nbyte is: " << endl;
+ for(int i = 0; i < byte.size(); i++){
+    cout << byte[i];
+ }
+cout << "\ndivisao[0] is: " << endl;
+ for(int i = 0; i < divisao[0].size(); i++){
+    cout << divisao[0][i];
+ }
  if(byte!=divisao[0]){
     cout <<"\n" << "Erro na contagem de caracteres" << endl;
  }
@@ -127,7 +141,6 @@ vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
 vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
     vector <int> corrigido;
     vector <int> enquadrado;
-    getchar();
     switch(erro){
         case PARIDADE:
             corrigido = ControleDeErroBitParidadePar(tremdebits);
@@ -152,26 +165,26 @@ vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vect
 vector <int> CamadaEnlaceReceptora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
     vector <int> corrigido;
     vector <int> desenquadrado;
-    switch(erro){
-        case PARIDADE:
-            corrigido = ControleDeErroBitParidadePar(tremdebits);
-            break;
-        case CRC:
-            corrigido = ControleDeErroCRC(tremdebits);
-            break;
-        case HAMMING:
-            corrigido = decodificacaoHamming(tremdebits);
-            break;
-    }
     switch(enquadramento){
         case CONTAGEM:
-            desenquadrado = ContagemDeCaracteres(corrigido);
+            desenquadrado = ContagemDeCaracteres(tremdebits);
             break;
         case INSERCAO:
-            desenquadrado = InsercaoDeBytes(corrigido);
+            desenquadrado = InsercaoDeBytes(tremdebits);
             break;
     }
-    return desenquadrado;
+    switch(erro){
+        case PARIDADE:
+            corrigido = ControleDeErroBitParidadePar(desenquadrado);
+            break;
+        case CRC:
+            corrigido = ControleDeErroCRC(desenquadrado);
+            break;
+        case HAMMING:
+            corrigido = decodificacaoHamming(desenquadrado);
+            break;
+    }
+    return corrigido;
 }
 vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> tremdebits) {
     int par0, par1, par2, par3;
