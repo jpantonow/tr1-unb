@@ -44,7 +44,6 @@ return enquadrado;
 
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
     for(int i = 0; i < byte.size(); i++){
-        cout << "byte inserido no quadro: " << byte[i] << endl;
         quadro.push_back(byte[i]);
     }
     return quadro;
@@ -223,7 +222,6 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits){
     vector <int> controledeerro;
     controledeerro = calculoparidade(tremdebits);
-    cout << "bit corrigido tamanho = " << controledeerro.size() << endl;getchar(); 
     return controledeerro;
 }
 
