@@ -15,7 +15,7 @@ divisao = dividirquadro(quadro);
  int size = divisao.size();
  vector <int> byte = int_byte(size);
  enquadrado = inserir_bytes(byte,enquadrado);
- for(int i = 0; i < divisao.size()-(i*size); i++){
+ for(int i = 0; i < divisao.size(); i++){
     for(int j = 0; j < divisao[i].size(); j++){
         enquadrado.push_back(divisao[i][j]);
      }
@@ -113,36 +113,21 @@ vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     vector<vector <int>> resultado;
     vector<int> byte;
     int loop = quadro.size()/8;
-    cout << loop << endl;
-    for(int j = 0; j < loop-1; j++){
-        cout << "comeca o loop j" << endl;
-        cout << "j==" << j << endl;
+    for(int j = 0; j < loop; j++){
         for(int i = 0; i < 8; i++){
-            cout << "comeca o loop i" << endl;
-            cout << "bit quadro: " << quadro[0] << endl;
-            getchar();
             byte.push_back(quadro[0]);
-            cout << "tamanho do byte " << byte.size() << endl;
-            getchar();
             quadro.erase(quadro.begin());
-            cout << "fim do loop i" << endl;
+            continue;
         }
-        cout << "saiu do laco" << endl;
-        getchar();
-        cout << "tamanho do byte a ser inserido: " << byte.size() << endl;
-        resultado.push_back(byte);
+        resultado.push_back(byte); 
         byte.clear();
         continue;
-        cout << "fim do loop j" << endl;
     }
-    cout << "saiu do loop j" << endl;
-    cout << resultado.size() << endl;
     return resultado;
 }
 vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
     vector <int> corrigido;
     vector <int> enquadrado;
-    cout << "começa aqui" << endl;
     getchar();
     switch(erro){
         case PARIDADE:
@@ -238,6 +223,7 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits){
     vector <int> controledeerro;
     controledeerro = calculoparidade(tremdebits);
+    cout << "bit corrigido tamanho = " << controledeerro.size() << endl;getchar(); 
     return controledeerro;
 }
 
