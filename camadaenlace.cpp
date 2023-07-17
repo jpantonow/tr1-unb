@@ -46,14 +46,16 @@ cout << "\ndivisao[0] is: " << endl;
  if(byte!=divisao[0]){
     cout <<"\n" << "Erro na contagem de caracteres" << endl;
  }
-
- for(int i = 0; i < byte.size(); i++){
-     enquadrado.insert(enquadrado.begin() + i, byte[i]);
-     for(int j = 0; j < divisao[i].size(); j++){
-        enquadrado.push_back(divisao[i][j]);
-     }
- }
-return enquadrado;
+for(int i = 0; i < 8; i++){
+    quadro.erase(quadro.begin());
+}
+//  for(int i = 0; i < byte.size(); i++){
+//      enquadrado.insert(enquadrado.begin() + i, byte[i]);
+//      for(int j = 0; j < divisao[i].size(); j++){
+//         enquadrado.push_back(divisao[i][j]);
+//      }
+//  }
+return quadro;
 }
 
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
@@ -263,7 +265,7 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tr
     }
     vector <int> carga_util;
     cout << "carga util:" << endl;
-    for(int i = 8; i < tam-8; i++){
+    for(int i = 0; i < 8; i++){
         cout << tremdebits[i];
         carga_util.push_back(tremdebits[i]);
     }
