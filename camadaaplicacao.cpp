@@ -34,7 +34,7 @@ void CamadaAplicacao::Transmissora() {
     CamadaEnlaceTransmissora camadaEnlaceTransmissora;
     vector <int> enquadrado = camadaEnlaceTransmissora.iniciar(erro,enquadramento,binario);
     //mudar o binario da camada fisica transmissora pra receber o enquadrado
-    camadaFisicaTransmissora.iniciar(codificacao, enquadrado, porcentagem);
+    camadaFisicaTransmissora.iniciar(codificacao, enquadrado, porcentagem, erro, enquadramento);
 }
 /**
  * @brief Método que transforma string em bits.
@@ -68,7 +68,7 @@ vector <int> CamadaAplicacao::ConversorStringBits(string mensagem) {
  * @param fluxoBrutoDeBits 
  * @param codificacao 
  */
-void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) {
+void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao, int erro, int enquadramento) {
     //MensagemCodificada(fluxoBrutoDeBits, codificacao);
     // CamadaEnlaceTransmissora camadaEnlace;
     // vector <int> enlace;
@@ -76,21 +76,23 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao) 
     MensagemCodificada(fluxoBrutoDeBits, codificacao);
     CamadaFisicaReceptora receptora;
     string mensagem;
-
+    CamadaEnlaceReceptora receptoraenlace;
+    vector <int> desenquadrado;
+    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, fluxoBrutoDeBits);
     switch (codificacao) {
         case BINARIA:
-        {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits);
+        {   mensagem = receptora.ReceptoraBinaria(desenquadrado);
             MensagemRecebida(mensagem);
             break;
         }
         case MANCHESTER:
-        {   mensagem = receptora.ReceptoraManchester(fluxoBrutoDeBits);
+        {   mensagem = receptora.ReceptoraManchester(desenquadrado);
             MensagemRecebida(mensagem);
             break;
         }
         case BIPOLAR:
         {
-            mensagem = receptora.ReceptoraBipolar(fluxoBrutoDeBits);
+            mensagem = receptora.ReceptoraBipolar(desenquadrado);
             MensagemRecebida(mensagem);
             break;
         }
