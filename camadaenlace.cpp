@@ -73,6 +73,30 @@ while(!quadro.empty()){
 }
 return enquadrado;
 }
+vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
+int cont = 0;
+int um5vezes = 0;
+vector <int> enquadrado;
+
+while(!quadro.empty()){
+    if(cont==0){
+        inserir_bytes(enquadrado, esc);
+        inserir_bytes(enquadrado, flag);
+    }
+    if(cont==7){
+        cont = 0;
+        enquadrado.push_back(quadro[0]);
+        quadro.erase(quadro.begin());
+        inserir_bytes(enquadrado, esc);
+        inserir_bytes(enquadrado, flag);
+        continue;
+    }
+    cont +=1;
+    enquadrado.push_back(quadro[0]);
+    quadro.erase(quadro.begin());
+}
+return enquadrado;
+}
 vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     vector<vector <int>> resultado;
     vector<int> byte;
@@ -148,7 +172,7 @@ vector <int> CamadaEnlaceReceptora::iniciar(int erro, int enquadramento, vector<
             desenquadrado = ContagemDeCaracteres(corrigido);
             break;
         case INSERCAO:
-            //desenquadrado = InsercaoDeBytes(corrigido);
+            desenquadrado = InsercaoDeBytes(corrigido);
             break;
     }
     return desenquadrado;
