@@ -74,22 +74,40 @@ while(!quadro.empty()){
 return enquadrado;
 }
 vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
-    int partes = quadro.size()/8;
-    vector<int> divisao;
     vector<vector <int>> resultado;
-    while(partes!=0){
-        divisao = inserir_bytes(quadro, divisao);
-        for(int j = 0; j < 8; j++){
+    vector<int> byte;
+    int loop = quadro.size()/8;
+    cout << loop << endl;
+    for(int j = 0; j < loop-1; j++){
+        cout << "comeca o loop j" << endl;
+        cout << "j==" << j << endl;
+        for(int i = 0; i < 8; i++){
+            cout << "comeca o loop i" << endl;
+            cout << "bit quadro: " << quadro[0] << endl;
+            getchar();
+            byte.push_back(quadro[0]);
+            cout << "tamanho do byte " << byte.size() << endl;
+            getchar();
             quadro.erase(quadro.begin());
+            cout << "fim do loop i" << endl;
         }
-        resultado.push_back(divisao);
-        partes = partes - 1;
+        cout << "saiu do laco" << endl;
+        getchar();
+        cout << "tamanho do byte a ser inserido: " << byte.size() << endl;
+        resultado.push_back(byte);
+        byte.clear();
+        continue;
+        cout << "fim do loop j" << endl;
     }
+    cout << "saiu do loop j" << endl;
+    cout << resultado.size() << endl;
     return resultado;
 }
 vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
     vector <int> corrigido;
     vector <int> enquadrado;
+    cout << "começa aqui" << endl;
+    getchar();
     switch(erro){
         case PARIDADE:
             corrigido = ControleDeErroBitParidadePar(tremdebits);
@@ -192,9 +210,6 @@ vector <int> CamadaEnlace::calculoparidade(vector <int> tremdebits){
     divisao = dividirquadro(tremdebits);
     int bit_paridade = 0;
     int sizeofbyte = divisao[0].size();
-    cout <<"fim da deivisao" << endl; getchar();
-    cout << divisao.size() << endl; getchar();
-    cout << divisao[0].size() << endl; getchar();
     for(int i = 0; i < sizeofbyte; i++){
         for(int j = 0; j < divisao.size(); j++){
             bit_paridade = bit_paridade ^ divisao[j][i];
