@@ -64,4 +64,5 @@ class CamadaAplicacao: public Camada {
      * @return vector <int> 
      */
     vector <int> ConversorStringBits(string mensagem);
+    void Retransmitir();
 };

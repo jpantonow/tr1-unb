@@ -97,6 +97,7 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao, 
             break;
         }
     }
+    Retransmitir();
 }
 
 /**
@@ -144,4 +145,14 @@ void CamadaAplicacao::MensagemCodificada(vector <int> fluxoBrutoDeBits, int codi
 void CamadaAplicacao::MensagemRecebida(string mensagem) {
     cout << "\n";
     cout << "\nA mensagem recebida foi: " << mensagem << endl;
+}
+
+void CamadaAplicacao::Retransmitir(){
+    string confirmacao;
+    cout << "\nDeseja retransmitir a mensagem? " << endl;
+    getline(cin,confirmacao);
+    if(confirmacao=="sim" or confirmacao=="SIM"){
+        Transmissora();
+    }
+
 }

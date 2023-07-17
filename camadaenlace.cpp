@@ -207,18 +207,6 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 
 }
 
-// vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
-//     int bit_paridade{};
-
-//     for (int i{}; i < tremdebits.size(); i++) {
-//         bit_paridade = bit_paridade ^ tremdebits[i];
-//     }
-
-//     tremdebits.push_back(bit_paridade);
-
-//     return tremdebits;
-// }
-
 vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits){
     vector <int> controledeerro;
     controledeerro = calculoparidade(tremdebits);
