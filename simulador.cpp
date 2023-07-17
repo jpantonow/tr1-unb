@@ -10,6 +10,7 @@ using namespace std;
 int main(){
     CamadaAplicacao camadaAplicacao;
     camadaAplicacao.Transmissora();
+    camadaAplicacao.Retransmitir();
     getch();
     return 0;
 }

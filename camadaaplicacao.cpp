@@ -97,7 +97,6 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao, 
             break;
         }
     }
-    Retransmitir();
 }
 
 /**
