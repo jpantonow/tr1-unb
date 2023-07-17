@@ -54,15 +54,15 @@ int um5vezes = 0;
 vector <int> enquadrado;
 
 while(!quadro.empty()){
-    if(quadro[0]==1){
-        um5vezes +=1;
-    }
-    else{
-        um5vezes = 0;
-    }
-    if(um5vezes == 5){
-        quadro.insert(quadro.begin()+1,0);
-    }
+    // if(quadro[0]==1){
+    //     um5vezes +=1;
+    // }
+    // else{
+    //     um5vezes = 0;
+    // }
+    // if(um5vezes == 5){
+    //     quadro.insert(quadro.begin()+1,0);
+    // }
     if(cont==0){
         inserir_bytes(enquadrado, esc);
         inserir_bytes(enquadrado, flag);
@@ -79,9 +79,9 @@ while(!quadro.empty()){
     enquadrado.push_back(quadro[0]);
     quadro.erase(quadro.begin());
 }
-while(enquadrado.size() % 8 != 0){
-    enquadrado.push_back(0);
-}
+// while(enquadrado.size() % 8 != 0){
+//     enquadrado.push_back(0);
+// }
 return enquadrado;
 }
 vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
