@@ -227,8 +227,8 @@ string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro, int enquadra
     vector <int> bitstream = ConversorBinarioBits(quadro);
     CamadaEnlaceReceptora receptoraenlace;
     vector <int> desenquadrado;
-    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, quadro);
-    string mensagem = ConversorBitString(bitstream);
+    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, bitstream);
+    string mensagem = ConversorBitString(desenquadrado);
     return mensagem;
 }
 /**
@@ -241,8 +241,8 @@ string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro, int enqua
     vector <int> bitstream = ConversorManchesterBits(quadro);
     CamadaEnlaceReceptora receptoraenlace;
     vector <int> desenquadrado;
-    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, quadro);
-    string mensagem = ConversorBitString(bitstream);
+    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, bitstream);
+    string mensagem = ConversorBitString(desenquadrado);
     return mensagem;
 }
 /**
@@ -255,8 +255,8 @@ string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits, int enqu
     vector <int> bitstream = ConversorBipolarBits(tremDeBits);
     CamadaEnlaceReceptora receptoraenlace;
     vector <int> desenquadrado;
-    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, tremDeBits);
-    string mensagem = ConversorBitString(bitstream);
+    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, bitstream);
+    string mensagem = ConversorBitString(desenquadrado);
     return mensagem;
 }
 
