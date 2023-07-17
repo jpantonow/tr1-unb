@@ -7,7 +7,12 @@ vector <int> CamadaEnlace::int_byte(int size){
     }
     return byte;
 }
-
+/**
+ * @brief Método de enquadramento que adiciona um byte de cabeçalho para ler a carga útil.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceTransmissora::ContagemDeCaracteres(vector <int> quadro){
 vector <int> enquadrado;
 vector <vector <int>> divisao;
@@ -22,25 +27,24 @@ divisao = dividirquadro(quadro);
  }
 return enquadrado;
 }
-
+/**
+ * @brief Método de desenquadramento que retira o cabeçalho para ler a carga útil.
+ * 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceReceptora::ContagemDeCaracteres(vector <int> quadro){
-vector <int> enquadrado;
+vector <int> desenquadrado;
 vector <vector <int>> divisao;
 divisao = dividirquadro(quadro);
- int size = divisao.size();
- vector <int> byte = int_byte(size-1);
+int size = divisao.size();
+vector <int> byte = int_byte(size-1);
 
 
 for(int i = 8; i < quadro.size(); i++){
-    enquadrado.push_back(quadro[i]);
+    desenquadrado.push_back(quadro[i]);
 }
-//  for(int i = 0; i < byte.size(); i++){
-//      enquadrado.insert(enquadrado.begin() + i, byte[i]);
-//      for(int j = 0; j < divisao[i].size(); j++){
-//         enquadrado.push_back(divisao[i][j]);
-//      }
-//  }
-return enquadrado;
+return desenquadrado;
 }
 
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
@@ -207,6 +211,12 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits
 
 }
 
+/**
+ * @brief Método de detecção de erro que adiciona vários bits de paridade no tremdebits.
+ * 
+ * @param tremdebits 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceTransmissora::ControleDeErroBitParidadePar(vector <int> tremdebits){
     vector <int> controledeerro;
     controledeerro = calculoparidade(tremdebits);
@@ -227,6 +237,12 @@ vector <int> CamadaEnlace::calculoparidade(vector <int> tremdebits){
     }
     return tremdebits;
 }
+/**
+ * @brief Método de detecção de erro que verifica se há erro no quadro.
+ * 
+ * @param tremdebits 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tremdebits) {
     int aux{};
     vector <int> paridade_recebida;
@@ -249,8 +265,6 @@ cout <<"\n";
          calcularparidade.pop_back();
     }
     if(paridade_calculada!=paridade_recebida){
-        cout << "tamanho da paridade calculada: " << paridade_calculada.size() << endl; getchar();
-        cout << "tamanho da paridade recebida: " << paridade_recebida.size() << endl; getchar();
         aux = 1;
     }
 
@@ -262,14 +276,10 @@ cout <<"\n";
         cout << paridade_calculada[i];
     }
     cout << "\n";
-    getchar();
     cout << "paridade recebida: " << endl;
     for(int i = 0; i < paridade_recebida.size(); i++){
         cout << paridade_recebida[i];
     }
-    getchar();
-    //tremdebits.pop_back();
-
     return tremdebits;
 }
 
@@ -354,7 +364,6 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
 vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro) {
     vector <int> aux1;
     size_t tamanhoByte = 8;
-    
     for (int i{}; i < flag.size(); i++) {
         aux1.push_back(flag[i]);
     }
@@ -374,16 +383,14 @@ vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro) {
         }
         
     }
-
+    for (int i{}; i < flag.size(); i++) {
+        aux1.push_back(flag[i]);
+    }
     return aux1;
 }
 
 vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro) {
-    
-    
-    
     vector <int> aux1;
-    
     int isEsc{};
     int isMensagem{};
     size_t tamanhoByte = 8;
@@ -415,7 +422,5 @@ vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro) {
             quadro.erase(quadro.begin(), quadro.begin() + tamanhoByte);
         }
     }
-    
     return aux1;
 }
-
