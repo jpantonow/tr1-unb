@@ -24,30 +24,22 @@ return enquadrado;
 }
 
 vector <int> CamadaEnlaceReceptora::ContagemDeCaracteres(vector <int> quadro){
-cout << "\n entrou na contagem de caracteres" << endl;
-getchar();
 vector <int> enquadrado;
- cout << "quadro is " << quadro.size() << endl;
- getchar();
 vector <vector <int>> divisao;
 divisao = dividirquadro(quadro);
  int size = divisao.size();
- cout << "size is " << size << endl;
- getchar();
  vector <int> byte = int_byte(size-1);
- cout << "\nbyte is: " << endl;
  for(int i = 0; i < byte.size(); i++){
     cout << byte[i];
  }
-cout << "\ndivisao[0] is: " << endl;
  for(int i = 0; i < divisao[0].size(); i++){
     cout << divisao[0][i];
  }
  if(byte!=divisao[0]){
     cout <<"\n" << "Erro na contagem de caracteres" << endl;
  }
-for(int i = 0; i < 8; i++){
-    quadro.erase(quadro.begin());
+for(int i = 8; i < quadro.size(); i++){
+    enquadrado.push_back(quadro[i]);
 }
 //  for(int i = 0; i < byte.size(); i++){
 //      enquadrado.insert(enquadrado.begin() + i, byte[i]);
@@ -55,7 +47,7 @@ for(int i = 0; i < 8; i++){
 //         enquadrado.push_back(divisao[i][j]);
 //      }
 //  }
-return quadro;
+return enquadrado;
 }
 
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
