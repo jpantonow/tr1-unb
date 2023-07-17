@@ -243,21 +243,45 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroBitParidadePar(vector <int> tr
     int aux{};
     vector <int> paridade_recebida;
     vector <int> paridade_calculada;
-    for(int i = tremdebits.size(); i > tremdebits.size()-9; i--){
+    int tam = tremdebits.size();
+    for(int i = tremdebits.size()-1; i > tam-9; i--){
         paridade_recebida.insert(paridade_recebida.begin(),tremdebits[i]);
         tremdebits.pop_back();
     }
-    paridade_calculada = calculoparidade(tremdebits);
-    for(int i = 0; i < paridade_calculada.size(); i++){
-        if(paridade_calculada[i]!= paridade_recebida[i]){
-            aux = 1;
-        }
+    vector <int> carga_util;
+    cout << "carga util:" << endl;
+    for(int i = 8; i < tam-8; i++){
+        cout << tremdebits[i];
+        carga_util.push_back(tremdebits[i]);
+    }
+cout <<"\n";
+    vector <int> calcularparidade; 
+    calcularparidade = calculoparidade(carga_util);
+    int tam2 = calcularparidade.size();
+    for(int i = tam2-1; i > tam2-9; i--){
+         paridade_calculada.insert(paridade_calculada.begin(),calcularparidade[i]);
+         calcularparidade.pop_back();
+    }
+    if(paridade_calculada!=paridade_recebida){
+        cout << "tamanho da paridade calculada: " << paridade_calculada.size() << endl; getchar();
+        cout << "tamanho da paridade recebida: " << paridade_recebida.size() << endl; getchar();
+        aux = 1;
     }
 
     if (aux) {
         cout << "Erro detectado no quadro!!!" << endl;
     }
-
+    cout << "paridade calculada: " << endl;
+    for(int i = 0; i < paridade_calculada.size(); i++){
+        cout << paridade_calculada[i];
+    }
+    cout << "\n";
+    getchar();
+    cout << "paridade recebida: " << endl;
+    for(int i = 0; i < paridade_recebida.size(); i++){
+        cout << paridade_recebida[i];
+    }
+    getchar();
     //tremdebits.pop_back();
 
     return tremdebits;
