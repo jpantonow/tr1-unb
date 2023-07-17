@@ -223,8 +223,11 @@ vector <int> CamadaFisicaReceptora::ConversorBipolarBits(vector <int> quadro) {
  * @param quadro 
  * @return string 
  */
-string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro) {
+string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro, int enquadramento, int erro) {
     vector <int> bitstream = ConversorBinarioBits(quadro);
+    CamadaEnlaceReceptora receptoraenlace;
+    vector <int> desenquadrado;
+    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, quadro);
     string mensagem = ConversorBitString(bitstream);
     return mensagem;
 }
@@ -234,8 +237,11 @@ string CamadaFisicaReceptora::ReceptoraBinaria(vector <int> quadro) {
  * @param quadro 
  * @return string 
  */
-string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro) {
+string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro, int enquadramento, int erro) {
     vector <int> bitstream = ConversorManchesterBits(quadro);
+    CamadaEnlaceReceptora receptoraenlace;
+    vector <int> desenquadrado;
+    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, quadro);
     string mensagem = ConversorBitString(bitstream);
     return mensagem;
 }
@@ -245,8 +251,11 @@ string CamadaFisicaReceptora::ReceptoraManchester(vector <int> quadro) {
  * @param tremDeBits 
  * @return string 
  */
-string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits) {
+string CamadaFisicaReceptora::ReceptoraBipolar(vector <int> tremDeBits, int enquadramento, int erro) {
     vector <int> bitstream = ConversorBipolarBits(tremDeBits);
+    CamadaEnlaceReceptora receptoraenlace;
+    vector <int> desenquadrado;
+    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, tremDeBits);
     string mensagem = ConversorBitString(bitstream);
     return mensagem;
 }

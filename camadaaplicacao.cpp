@@ -76,23 +76,23 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao, 
     MensagemCodificada(fluxoBrutoDeBits, codificacao);
     CamadaFisicaReceptora receptora;
     string mensagem;
-    CamadaEnlaceReceptora receptoraenlace;
-    vector <int> desenquadrado;
-    desenquadrado = receptoraenlace.iniciar(enquadramento, erro, fluxoBrutoDeBits);
+    //CamadaEnlaceReceptora receptoraenlace;
+    //vector <int> desenquadrado;
+    //desenquadrado = receptoraenlace.iniciar(enquadramento, erro, fluxoBrutoDeBits);
     switch (codificacao) {
         case BINARIA:
-        {   mensagem = receptora.ReceptoraBinaria(desenquadrado);
+        {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits, enquadramento, erro);
             MensagemRecebida(mensagem);
             break;
         }
         case MANCHESTER:
-        {   mensagem = receptora.ReceptoraManchester(desenquadrado);
+        {   mensagem = receptora.ReceptoraManchester(fluxoBrutoDeBits, enquadramento, erro);
             MensagemRecebida(mensagem);
             break;
         }
         case BIPOLAR:
         {
-            mensagem = receptora.ReceptoraBipolar(desenquadrado);
+            mensagem = receptora.ReceptoraBipolar(fluxoBrutoDeBits, enquadramento, erro);
             MensagemRecebida(mensagem);
             break;
         }

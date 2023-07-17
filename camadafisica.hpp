@@ -129,21 +129,21 @@ class CamadaFisicaReceptora: public Camada {
      * @param quadro 
      * @return string 
      */
-    string ReceptoraBinaria(vector <int> quadro);
+    string ReceptoraBinaria(vector <int> quadro, int enquadramento, int erro);
     /**
      * @brief Método que recebe a codificação manchester e decodifica em uma mensagem.
      * 
      * @param quadro 
      * @return string 
      */
-    string ReceptoraManchester(vector <int> quadro);
+    string ReceptoraManchester(vector <int> quadro, int enquadramento, int erro);
     /**
      * @brief Método que recebe a codificação bipolar e decodifica em uma mensagem.
      * 
      * @param quadro 
      * @return string 
      */
-    string ReceptoraBipolar(vector <int> quadro);
+    string ReceptoraBipolar(vector <int> quadro, int enquadramento, int erro);
 };
 
 /**
