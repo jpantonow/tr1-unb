@@ -49,66 +49,66 @@ vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
     }
     return quadro;
 }
-vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro){
-int cont = 0;
-int um5vezes = 0;
-vector <int> enquadrado;
+// vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro){
+// int cont = 0;
+// int um5vezes = 0;
+// vector <int> enquadrado;
 
-while(!quadro.empty()){
-    // if(quadro[0]==1){
-    //     um5vezes +=1;
-    // }
-    // else{
-    //     um5vezes = 0;
-    // }
-    // if(um5vezes == 5){
-    //     quadro.insert(quadro.begin()+1,0);
-    // }
-    if(cont==0){
-        inserir_bytes(enquadrado, esc);
-        inserir_bytes(enquadrado, flag);
-    }
-    if(cont==7){
-        cont = 0;
-        enquadrado.push_back(quadro[0]);
-        quadro.erase(quadro.begin());
-        inserir_bytes(enquadrado, esc);
-        inserir_bytes(enquadrado, flag);
-        continue;
-    }
-    cont +=1;
-    enquadrado.push_back(quadro[0]);
-    quadro.erase(quadro.begin());
-}
-// while(enquadrado.size() % 8 != 0){
-//     enquadrado.push_back(0);
+// while(!quadro.empty()){
+//     // if(quadro[0]==1){
+//     //     um5vezes +=1;
+//     // }
+//     // else{
+//     //     um5vezes = 0;
+//     // }
+//     // if(um5vezes == 5){
+//     //     quadro.insert(quadro.begin()+1,0);
+//     // }
+//     if(cont==0){
+//         inserir_bytes(enquadrado, esc);
+//         inserir_bytes(enquadrado, flag);
+//     }
+//     if(cont==7){
+//         cont = 0;
+//         enquadrado.push_back(quadro[0]);
+//         quadro.erase(quadro.begin());
+//         inserir_bytes(enquadrado, esc);
+//         inserir_bytes(enquadrado, flag);
+//         continue;
+//     }
+//     cont +=1;
+//     enquadrado.push_back(quadro[0]);
+//     quadro.erase(quadro.begin());
 // }
-return enquadrado;
-}
-vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
-int cont = 0;
-int um5vezes = 0;
-vector <int> enquadrado;
+// // while(enquadrado.size() % 8 != 0){
+// //     enquadrado.push_back(0);
+// // }
+// return enquadrado;
+// }
+// vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
+// int cont = 0;
+// int um5vezes = 0;
+// vector <int> enquadrado;
 
-while(!quadro.empty()){
-    if(cont==0){
-        inserir_bytes(enquadrado, esc);
-        inserir_bytes(enquadrado, flag);
-    }
-    if(cont==7){
-        cont = 0;
-        enquadrado.push_back(quadro[0]);
-        quadro.erase(quadro.begin());
-        inserir_bytes(enquadrado, esc);
-        inserir_bytes(enquadrado, flag);
-        continue;
-    }
-    cont +=1;
-    enquadrado.push_back(quadro[0]);
-    quadro.erase(quadro.begin());
-}
-return enquadrado;
-}
+// while(!quadro.empty()){
+//     if(cont==0){
+//         inserir_bytes(enquadrado, esc);
+//         inserir_bytes(enquadrado, flag);
+//     }
+//     if(cont==7){
+//         cont = 0;
+//         enquadrado.push_back(quadro[0]);
+//         quadro.erase(quadro.begin());
+//         inserir_bytes(enquadrado, esc);
+//         inserir_bytes(enquadrado, flag);
+//         continue;
+//     }
+//     cont +=1;
+//     enquadrado.push_back(quadro[0]);
+//     quadro.erase(quadro.begin());
+// }
+// return enquadrado;
+// }
 vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     vector<vector <int>> resultado;
     vector<int> byte;
@@ -350,12 +350,8 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
     return tremdebits;
 }
 
-/***
-vector <int> enquadramentoInsercaoBytes (vector <int> quadro) {
-    
-    vector <int> flag{0,0,0,0,1,1,1,1};
-    vector <int> esc{0,0,0,0,0,1,1,0};
-    
+
+vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro) {
     vector <int> aux1;
     size_t tamanhoByte = 8;
     
@@ -382,10 +378,9 @@ vector <int> enquadramentoInsercaoBytes (vector <int> quadro) {
     return aux1;
 }
 
-vector <int> desenquadrarInsercaoBytes (vector <int> quadro) {
+vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro) {
     
-    vector <int> flag{0,0,0,0,1,1,1,1};
-    vector <int> esc{0,0,0,0,0,1,1,0};
+    
     
     vector <int> aux1;
     
@@ -423,4 +418,4 @@ vector <int> desenquadrarInsercaoBytes (vector <int> quadro) {
     
     return aux1;
 }
-***/
+
