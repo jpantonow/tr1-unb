@@ -177,38 +177,63 @@ vector <int> CamadaEnlaceReceptora::iniciar(int erro, int enquadramento, vector<
     }
     return corrigido;
 }
-vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> tremdebits) {
+vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> binary) {
     int par0, par1, par2, par3;
     vector <int> tremcodificado;
-
-    par0 = tremdebits[0] ^ tremdebits[1] ^ tremdebits[3] ^ tremdebits[4] ^ tremdebits[6];
-    par1 = tremdebits[0] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[5] ^ tremdebits[6];
-    par2 = tremdebits[1] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[7];
-    par3 = tremdebits[4] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[7];
-
-    tremcodificado = {par0, par1, tremdebits[0], par2, tremdebits[1], tremdebits[2], tremdebits[3], par3, tremdebits[4], tremdebits[5], tremdebits[6], tremdebits[7], 0, 0, 0, 0};
-
-    return tremcodificado;
-}
-
-vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> tremdebits) {
-    int pos_errada {};
-    vector <int> tremcorrigido;
-
-    pos_errada = 1 * (tremdebits[0] ^ tremdebits[2] ^ tremdebits[4] ^ tremdebits[6] ^ tremdebits[8] ^ tremdebits[10]) + 2 * (tremdebits[1] ^ tremdebits[2] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[9] ^ tremdebits[10]) + 4 * (tremdebits[3] ^ tremdebits[4] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[11]) + 8 * (tremdebits[7] ^ tremdebits[8] ^ tremdebits[9] ^ tremdebits[10] ^ tremdebits[11]);
-
-    if (pos_errada) {
-        if (tremdebits[pos_errada - 1]) {
-            tremdebits[pos_errada - 1] = 0;
-        } else {
-            tremdebits[pos_errada] = 1;
+    vector <vector<int>> tremdebits;
+    tremdebits = dividirquadro(binary);
+    vector <vector<int>> resultado;
+    vector <int> corrigido;
+    for(int i = 0; i < tremdebits.size(); i++){
+        par0 = tremdebits[i][0] ^ tremdebits[i][1] ^ tremdebits[i][3] ^ tremdebits[i][4] ^ tremdebits[i][6];
+        par1 = tremdebits[i][0] ^ tremdebits[i][2] ^ tremdebits[i][3] ^ tremdebits[i][5] ^ tremdebits[i][6];
+        par2 = tremdebits[i][1] ^ tremdebits[i][2] ^ tremdebits[i][3] ^ tremdebits[i][7];
+        par3 = tremdebits[i][4] ^ tremdebits[i][5] ^ tremdebits[i][6] ^ tremdebits[i][7];
+        tremcodificado = {par0, par1, tremdebits[i][0], par2, tremdebits[i][1], tremdebits[i][2], tremdebits[i][3], par3, tremdebits[i][4], tremdebits[i][5], tremdebits[i][6], tremdebits[i][7], 0, 0, 0, 0};
+        resultado.push_back(tremcodificado);
+        tremcodificado.clear();
+    }
+    // par0 = tremdebits[0] ^ tremdebits[1] ^ tremdebits[3] ^ tremdebits[4] ^ tremdebits[6];
+    // par1 = tremdebits[0] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[5] ^ tremdebits[6];
+    // par2 = tremdebits[1] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[7];
+    // par3 = tremdebits[4] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[7];
+    for(int i =0; i < resultado.size();i++){
+        for(int j = 0; j < resultado[i].size();j++){
+            corrigido.push_back(resultado[i][j]);
         }
     }
+    cout << "tamanho do corrigido == " << corrigido.size() << endl;
+    return corrigido;
+}
 
-    tremcorrigido = {tremdebits[2], tremdebits[4], tremdebits[5], tremdebits[6], tremdebits[8], tremdebits[9], tremdebits[10], tremdebits[11]};
+vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> binary) {
+    int pos_errada {};
+    vector <int> tremcorrigido;
+    vector <vector<int>> tremdebits;
+    tremdebits = dividirquadro(binary);
+    vector <vector<int>> resultado;
+    vector <int> corrigido;
+    for(int i = 0; i < tremdebits.size(); i++){
+        pos_errada = 1 * (tremdebits[i][0] ^ tremdebits[i][2] ^ tremdebits[i][4] ^ tremdebits[i][6] ^ tremdebits[i][8] ^ tremdebits[i][10]) + 2 * (tremdebits[i][1] ^ tremdebits[i][2] ^ tremdebits[i][5] ^ tremdebits[i][6] ^ tremdebits[i][9] ^ tremdebits[i][10]) + 4 * (tremdebits[i][3] ^ tremdebits[i][4] ^ tremdebits[i][5] ^ tremdebits[i][6] ^ tremdebits[i][11]) + 8 * (tremdebits[i][7] ^ tremdebits[i][8] ^ tremdebits[i][9] ^ tremdebits[i][10] ^ tremdebits[i][11]);
 
-    return tremcorrigido;
-
+    if (pos_errada) {
+        if (tremdebits[i][pos_errada - 1]) {
+            tremdebits[i][pos_errada - 1] = 0;
+        } else {
+            tremdebits[i][pos_errada] = 1;
+        }
+    }
+    tremcorrigido = {tremdebits[i][2], tremdebits[i][4], tremdebits[i][5], tremdebits[i][6], tremdebits[i][8], tremdebits[i][9], tremdebits[i][10], tremdebits[i][11]};
+    resultado.push_back(tremcorrigido);
+    tremcorrigido.clear();
+    pos_errada = 0;
+    }
+    for(int i =0; i < resultado.size();i++){
+        for(int j = 0; j < resultado[i].size();j++){
+            corrigido.push_back(resultado[i][j]);
+        }
+    }
+    return corrigido;
 }
 
 /**
@@ -290,7 +315,7 @@ vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> tremdebits
         dividendo.push_back(tremdebits[i]);
     }
 
-    for (int i{}; i < 32; i++) {
+    for (int i{}; i < 33; i++) {
         dividendo.push_back(0);
         aux1.push_back(dividendo[i]);
     }
@@ -310,7 +335,6 @@ vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> tremdebits
         }
         aux2.clear();
     }
-
     for (int k{}; k < aux1.size(); k++) {
         tremdebits.push_back(aux1[k]);
     }
@@ -352,11 +376,9 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
     }
 
     tremdebits.clear();
-
     for (int k{}; k < dividendo.size() - 32; k++){
         tremdebits.push_back(dividendo[k]);
     }
-
     return tremdebits;
 }
 
@@ -394,7 +416,8 @@ vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro) {
     int isEsc{};
     int isMensagem{};
     size_t tamanhoByte = 8;
-    
+    vector<int> error = quadro;
+
     while (quadro.size()) {
         if (isMensagem) {
             if (isEsc) {
@@ -421,6 +444,11 @@ vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro) {
         if (quadro.size() >= tamanhoByte) {
             quadro.erase(quadro.begin(), quadro.begin() + tamanhoByte);
         }
+    }
+    if(aux1.empty()){
+        cout <<"\nErro detectado!!!" << endl;
+        cout <<"Flag e Esc inexistentes" << endl;
+        return error;
     }
     return aux1;
 }
