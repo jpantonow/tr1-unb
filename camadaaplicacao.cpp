@@ -149,9 +149,14 @@ void CamadaAplicacao::MensagemRecebida(string mensagem) {
 void CamadaAplicacao::Retransmitir(){
     string confirmacao;
     cout << "\nDeseja retransmitir a mensagem? " << endl;
+    cin.clear();
+    cin.sync();
     getline(cin,confirmacao);
     if(confirmacao=="sim" or confirmacao=="SIM"){
         Transmissora();
+    }
+    else{
+        return;
     }
 
 }

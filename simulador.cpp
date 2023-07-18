@@ -11,5 +11,6 @@ int main(){
     CamadaAplicacao camadaAplicacao;
     camadaAplicacao.Transmissora();
     camadaAplicacao.Retransmitir();
+    getchar();
     return 0;
 }

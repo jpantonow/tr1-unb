@@ -221,7 +221,6 @@ vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> binary) {
     cout << "tamanho do corrigido == " << corrigido.size() << endl;
     return corrigido;
 }
-
 vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> binary) {
     int pos_errada= 0;
     vector <int> tremcorrigido;
@@ -229,10 +228,12 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> binary) {
     tremdebits = dividirhamming(binary);
     vector <vector<int>> resultado;
     vector <int> corrigido;
+    bool haserror;
 
-    for(int i = 0; i < tremdebits.size(); i++){
+   for(int i = 0; i < tremdebits.size(); i++){
         pos_errada = 1 * (tremdebits[i][0] ^ tremdebits[i][2] ^ tremdebits[i][4] ^ tremdebits[i][6] ^ tremdebits[i][8] ^ tremdebits[i][10]) + 2 * (tremdebits[i][1] ^ tremdebits[i][2] ^ tremdebits[i][5] ^ tremdebits[i][6] ^ tremdebits[i][9] ^ tremdebits[i][10]) + 4 * (tremdebits[i][3] ^ tremdebits[i][4] ^ tremdebits[i][5] ^ tremdebits[i][6] ^ tremdebits[i][11]) + 8 * (tremdebits[i][7] ^ tremdebits[i][8] ^ tremdebits[i][9] ^ tremdebits[i][10] ^ tremdebits[i][11]);
         if (pos_errada) {
+            haserror = true;
             if (tremdebits[i][pos_errada - 1]) {
                 tremdebits[i][pos_errada - 1] = 0;
             } else {
@@ -246,6 +247,9 @@ vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> binary) {
         for(int j = 0; j < resultado[i].size();j++){
             corrigido.push_back(resultado[i][j]);
         }
+    }
+    if(haserror){
+        cout <<"\nErro detectado!!!" << endl;
     }
     return corrigido;
 }
