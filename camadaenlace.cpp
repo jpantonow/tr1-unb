@@ -186,6 +186,16 @@ vector <int> CamadaEnlaceReceptora::iniciar(int erro, int enquadramento, vector<
     }
     return corrigido;
 }
+/**
+ * @brief Método de correção de erros: codificacaoHamming.
+ * 
+ * Recebe uma mensagem em binario e aplica o método de correção hamming nela.
+ * 
+ * O resultado é encaminhado para o enquadramento.
+ * 
+ * @param binary 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> binary) {
     int par0, par1, par2, par3;
     vector <int> tremcodificado;
