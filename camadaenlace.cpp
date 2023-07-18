@@ -218,7 +218,6 @@ vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> binary) {
             corrigido.push_back(resultado[i][j]);
         }
     }
-    cout << "tamanho do corrigido == " << corrigido.size() << endl;
     return corrigido;
 }
 vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> binary) {
