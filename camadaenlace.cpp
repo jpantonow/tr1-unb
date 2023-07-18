@@ -53,66 +53,7 @@ vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
     }
     return quadro;
 }
-// vector <int> CamadaEnlaceTransmissora::InsercaoDeBytes(vector <int> quadro){
-// int cont = 0;
-// int um5vezes = 0;
-// vector <int> enquadrado;
 
-// while(!quadro.empty()){
-//     // if(quadro[0]==1){
-//     //     um5vezes +=1;
-//     // }
-//     // else{
-//     //     um5vezes = 0;
-//     // }
-//     // if(um5vezes == 5){
-//     //     quadro.insert(quadro.begin()+1,0);
-//     // }
-//     if(cont==0){
-//         inserir_bytes(enquadrado, esc);
-//         inserir_bytes(enquadrado, flag);
-//     }
-//     if(cont==7){
-//         cont = 0;
-//         enquadrado.push_back(quadro[0]);
-//         quadro.erase(quadro.begin());
-//         inserir_bytes(enquadrado, esc);
-//         inserir_bytes(enquadrado, flag);
-//         continue;
-//     }
-//     cont +=1;
-//     enquadrado.push_back(quadro[0]);
-//     quadro.erase(quadro.begin());
-// }
-// // while(enquadrado.size() % 8 != 0){
-// //     enquadrado.push_back(0);
-// // }
-// return enquadrado;
-// }
-// vector <int> CamadaEnlaceReceptora::InsercaoDeBytes(vector <int> quadro){
-// int cont = 0;
-// int um5vezes = 0;
-// vector <int> enquadrado;
-
-// while(!quadro.empty()){
-//     if(cont==0){
-//         inserir_bytes(enquadrado, esc);
-//         inserir_bytes(enquadrado, flag);
-//     }
-//     if(cont==7){
-//         cont = 0;
-//         enquadrado.push_back(quadro[0]);
-//         quadro.erase(quadro.begin());
-//         inserir_bytes(enquadrado, esc);
-//         inserir_bytes(enquadrado, flag);
-//         continue;
-//     }
-//     cont +=1;
-//     enquadrado.push_back(quadro[0]);
-//     quadro.erase(quadro.begin());
-// }
-// return enquadrado;
-// }
 vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     vector<vector <int>> resultado;
     vector<int> byte;
@@ -209,10 +150,6 @@ vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> binary) {
         resultado.push_back(tremcodificado);
         tremcodificado.clear();
     }
-    // par0 = tremdebits[0] ^ tremdebits[1] ^ tremdebits[3] ^ tremdebits[4] ^ tremdebits[6];
-    // par1 = tremdebits[0] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[5] ^ tremdebits[6];
-    // par2 = tremdebits[1] ^ tremdebits[2] ^ tremdebits[3] ^ tremdebits[7];
-    // par3 = tremdebits[4] ^ tremdebits[5] ^ tremdebits[6] ^ tremdebits[7];
     for(int i =0; i < resultado.size();i++){
         for(int j = 0; j < resultado[i].size();j++){
             corrigido.push_back(resultado[i][j]);
