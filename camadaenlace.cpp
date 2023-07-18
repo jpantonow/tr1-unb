@@ -219,6 +219,14 @@ vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> binary) {
     }
     return corrigido;
 }
+/**
+ * @brief Método de detecção de erros: hamming.
+ * 
+ * Verifica se há erros conforme o método de hamming para detecção de erros.
+ * 
+ * @param binary 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> binary) {
     int pos_errada= 0;
     vector <int> tremcorrigido;
@@ -359,7 +367,7 @@ vector <int> CamadaEnlaceTransmissora::ControleDeErroCRC(vector <int> tremdebits
 
 vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
     vector <int> aux1, aux2, dividendo;
-
+    bool hasError;
     for (int i{}; i < tremdebits.size(); i++) {
         dividendo.push_back(tremdebits[i]);
     }
@@ -387,8 +395,11 @@ vector <int> CamadaEnlaceReceptora::ControleDeErroCRC(vector <int> tremdebits) {
 
     for (int k{}; k < aux1.size(); k++){
         if (aux1[k]) {
-             cout << "Erro encontrado!!!" << endl;
+            hasError = true;
         }
+    }
+    if(hasError){
+         cout << "\nErro encontrado!!!" << endl;
     }
 
     tremdebits.clear();
