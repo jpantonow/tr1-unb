@@ -69,16 +69,9 @@ vector <int> CamadaAplicacao::ConversorStringBits(string mensagem) {
  * @param codificacao 
  */
 void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao, int erro, int enquadramento) {
-    //MensagemCodificada(fluxoBrutoDeBits, codificacao);
-    // CamadaEnlaceTransmissora camadaEnlace;
-    // vector <int> enlace;
-    // enlace = camadaEnlace.ContagemDeCaracteres(fluxoBrutoDeBits);
     MensagemCodificada(fluxoBrutoDeBits, codificacao);
     CamadaFisicaReceptora receptora;
     string mensagem;
-    //CamadaEnlaceReceptora receptoraenlace;
-    //vector <int> desenquadrado;
-    //desenquadrado = receptoraenlace.iniciar(enquadramento, erro, fluxoBrutoDeBits);
     switch (codificacao) {
         case BINARIA:
         {   mensagem = receptora.ReceptoraBinaria(fluxoBrutoDeBits, enquadramento, erro);
@@ -97,6 +90,7 @@ void CamadaAplicacao::Receptora(vector <int> fluxoBrutoDeBits, int codificacao, 
             break;
         }
     }
+    Retransmitir();
 }
 
 /**
