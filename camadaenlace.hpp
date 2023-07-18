@@ -24,6 +24,7 @@ class CamadaEnlace{
     vector <int> complementode1(vector <int> numero);
     vector <int> somabinaria(vector <int>, vector<int>);
     vector <vector <int>> dividirquadro(vector <int>);
+    vector <vector <int>> dividirhamming(vector <int>);
     vector <int> calculoparidade(vector <int>);
 };
 

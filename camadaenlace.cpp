@@ -129,6 +129,22 @@ vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     }
     return resultado;
 }
+vector <vector<int>> CamadaEnlace::dividirhamming(vector <int> quadro){
+    vector<vector <int>> resultado;
+    vector<int> byte;
+    int loop = quadro.size()/16;
+    for(int j = 0; j < loop; j++){
+        for(int i = 0; i < 16; i++){
+            byte.push_back(quadro[0]);
+            quadro.erase(quadro.begin());
+            continue;
+        }
+        resultado.push_back(byte); 
+        byte.clear();
+        continue;
+    }
+    return resultado;
+}
 vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
     vector <int> corrigido;
     vector <int> enquadrado;
@@ -207,26 +223,24 @@ vector <int> CamadaEnlaceTransmissora::codificacaoHamming(vector <int> binary) {
 }
 
 vector <int> CamadaEnlaceReceptora::decodificacaoHamming(vector <int> binary) {
-    int pos_errada {};
+    int pos_errada= 0;
     vector <int> tremcorrigido;
     vector <vector<int>> tremdebits;
-    tremdebits = dividirquadro(binary);
+    tremdebits = dividirhamming(binary);
     vector <vector<int>> resultado;
     vector <int> corrigido;
+
     for(int i = 0; i < tremdebits.size(); i++){
         pos_errada = 1 * (tremdebits[i][0] ^ tremdebits[i][2] ^ tremdebits[i][4] ^ tremdebits[i][6] ^ tremdebits[i][8] ^ tremdebits[i][10]) + 2 * (tremdebits[i][1] ^ tremdebits[i][2] ^ tremdebits[i][5] ^ tremdebits[i][6] ^ tremdebits[i][9] ^ tremdebits[i][10]) + 4 * (tremdebits[i][3] ^ tremdebits[i][4] ^ tremdebits[i][5] ^ tremdebits[i][6] ^ tremdebits[i][11]) + 8 * (tremdebits[i][7] ^ tremdebits[i][8] ^ tremdebits[i][9] ^ tremdebits[i][10] ^ tremdebits[i][11]);
-
-    if (pos_errada) {
-        if (tremdebits[i][pos_errada - 1]) {
-            tremdebits[i][pos_errada - 1] = 0;
-        } else {
-            tremdebits[i][pos_errada] = 1;
+        if (pos_errada) {
+            if (tremdebits[i][pos_errada - 1]) {
+                tremdebits[i][pos_errada - 1] = 0;
+            } else {
+                tremdebits[i][pos_errada-1] = 1;
+            }
         }
-    }
-    tremcorrigido = {tremdebits[i][2], tremdebits[i][4], tremdebits[i][5], tremdebits[i][6], tremdebits[i][8], tremdebits[i][9], tremdebits[i][10], tremdebits[i][11]};
-    resultado.push_back(tremcorrigido);
-    tremcorrigido.clear();
-    pos_errada = 0;
+        tremcorrigido = {tremdebits[i][2], tremdebits[i][4], tremdebits[i][5], tremdebits[i][6], tremdebits[i][8], tremdebits[i][9], tremdebits[i][10], tremdebits[i][11]};
+        resultado.push_back(tremcorrigido);
     }
     for(int i =0; i < resultado.size();i++){
         for(int j = 0; j < resultado[i].size();j++){
