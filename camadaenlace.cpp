@@ -1,4 +1,10 @@
 #include "camadaenlace.hpp"
+/**
+ * @brief Método auxiliar para transformar inteiros em bytes
+ * 
+ * @param size 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlace::int_byte(int size){
     vector <int> byte;
     for(int i = 0; i <= 7; i++){
@@ -47,13 +53,25 @@ for(int i = 8; i < quadro.size(); i++){
 return desenquadrado;
 }
 
+/**
+ * @brief Método auxiliar pra inserir um byte em um quadro
+ * 
+ * @param byte 
+ * @param quadro 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlace::inserir_bytes(vector <int> byte, vector<int> quadro){
     for(int i = 0; i < byte.size(); i++){
         quadro.push_back(byte[i]);
     }
     return quadro;
 }
-
+/**
+ * @brief Método auxiliar para dividir o quadro em n bytes.
+ * 
+ * @param quadro 
+ * @return vector <vector<int>> 
+ */
 vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     vector<vector <int>> resultado;
     vector<int> byte;
@@ -70,6 +88,12 @@ vector <vector<int>> CamadaEnlace::dividirquadro(vector <int> quadro){
     }
     return resultado;
 }
+/**
+ * @brief Método auxiliar para dividir o quadro em n partes de 16 bits(hamming+0000)
+ * 
+ * @param quadro 
+ * @return vector <vector<int>> 
+ */
 vector <vector<int>> CamadaEnlace::dividirhamming(vector <int> quadro){
     vector<vector <int>> resultado;
     vector<int> byte;
@@ -86,6 +110,20 @@ vector <vector<int>> CamadaEnlace::dividirhamming(vector <int> quadro){
     }
     return resultado;
 }
+/**
+ * @brief Método que recebe o trem de bits e encaminha para o enlace.
+ * 
+ * Recebe o trem de bits e nele é aplicado um método escolhido de detecção de erro.
+ * 
+ * Após aplicar o método de detecção de erro, é feito o enquadramento.
+ * 
+ * O resultado das operações é encaminhado para a camada física trasmissora.
+ * 
+ * @param erro 
+ * @param enquadramento 
+ * @param tremdebits 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
     vector <int> corrigido;
     vector <int> enquadrado;
@@ -110,6 +148,20 @@ vector <int> CamadaEnlaceTransmissora::iniciar(int erro, int enquadramento, vect
     }
     return enquadrado;
 }
+/**
+ * @brief Método que recebe o quadro decodificado da camada física receptora.
+ * 
+ * Recebe o quadro e o desenquadra.
+ * 
+ * Após isso, verifica-se e detectam-se erros.
+ * 
+ * O resultado das operações é encaminhado para a camada de aplicação receptora.
+ * 
+ * @param erro 
+ * @param enquadramento 
+ * @param tremdebits 
+ * @return vector <int> 
+ */
 vector <int> CamadaEnlaceReceptora::iniciar(int erro, int enquadramento, vector<int> tremdebits){
     vector <int> corrigido;
     vector <int> desenquadrado;
